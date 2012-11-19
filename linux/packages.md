@@ -4,7 +4,7 @@ Packages
 ### From `pacman`
 
 	dbus xorg-server xorg-server-utils alsa-utils xf86-video-ati
-	sudo xfce4 openbox
+	sudo xfce4 lxdm
 
 `xf86-video-nouveau` for NVIDIA. 
 `virtualbox-archlinux-additions` for Virtual Box guest
@@ -12,8 +12,7 @@ Packages
 	xfce4-power-manager acpi pm-utils cpupower 
 	gedit chromium firefox p7zip xarchiver ristretto git blender vlc flashplugin
 	evince virtualbox virtualbox-additions pidgin gparted ntfs-3g meld xournal 
-	nodejs mongodb transmission-gtk gvfs gvfs-smb thunar-archive-plugin xfce4-screenshooter 
-	xfce4-taskmanager xfce4-mount-plugin mcomix libcups
+	nodejs mongodb transmission-gtk gvfs gvfs-smb thunar-archive-plugin xfce4-screenshooter xfce4-taskmanager xfce4-mount-plugin mcomix libcups wget gummi texlive-most file-roller jre7-openjdk 
 
 ### From AUR
 
@@ -23,7 +22,7 @@ First install `aurget`
 
 Then ... 
 
-	sublime-text xfce-theme-greybird faenza-icon-theme
+	sublime-text xfce-theme-greybird faenza-icon-theme profile-sync-daemon
 
 ### From `npm -g`
 
