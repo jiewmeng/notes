@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Thermodynamics}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Zeroth Law of Thermodynamics}
+
+If A and B are in separately in thermoequilibrium with C, then A and B are in theroequilibrium with each other
+
+\section{Linear Expansion}
+
+$$\Delta L = \alpha L_i \Delta T$$
+
+\section{Area Expansion}
+
+$$\Delta A = 2\alpha A_i \Delta T$$
+
+\section{Volume Expansion}
+
+$$\Delta V = \beta V_i \Delta T$$
+
+For a solid, $\beta = 3\alpha$
+
+\section{The Mole}
+
+Avogadro's Hypothesis: Equal Volumes of gas at same temperature and presure contain equal number of atoms/molecules. 
+
+Avogardro's Number: $N_A = 6.022 \times 10^{23}$
+
+$moles = \text{mass}/\text{molar mass}$
+
+\section{\color{red} Gas Formulas}
+
+$$PV [J] = nRT$$
+
+\boxed{\color{red} IMPT: \textbf{$T$ in kelvins ($T_C + 273.15$)}}
+
+$R = 8.314 J/mol \cdot K$ is universal gas constant
+
+\section{Specific Heat ($c$)}
+
+Measure of how \hl{insensitive} a substance is to \hl{addition of energy}
+
+$$c = \frac{Q}{m \Delta T} \qquad \qquad Q = c \cdot m \cdot \Delta T$$
+
+$Q$ is energy (eg. energy lost in cooling)
+
+\begin{itemize*}
+	\item Higher specific heat $\rightarrow$ worse burn
+	\item Lower specific heat $\rightarrow$ faster to cool down
+\end{itemize*}
+
+\section{Phase Changes}
+
+When a substance changes state eg. melt/freeze, boil/condense. \hl{No change in temperature}
+
+\section{Latent Heat ($L$)}
+
+Energy needed to change state of substance
+
+$$L = \frac{Q}{m} \qquad \qquad Q = \pm mL$$
+
+\begin{itemize*}
+	\item Fusion: solid $\leftrightarrow$ liquid
+	\item Vaporization: liquid $\leftrightarrow$ gas
+\end{itemize*}
+
+\section{Work}
+
+$$W = - \int_{V_i}^{V_f} P \; dV \qquad \qquad P = \frac{F}{A}$$
+
+\begin{itemize*}
+	\item Work on gas positive $\rightarrow$ gas compressed
+	\item Work on gas negative $\rightarrow$ gas expands 
+\end{itemize*}
+
+\includegraphics[scale=0.7]{pv-digram.png}
+
+\section{First Law of Thermodynamics}
+
+$$\Delta E_{int} = Q + W$$
+
+$Q$ is heat energy (see specific heat)
+
+\section{Cyclic Process}
+
+Starts and end at same state $\rightarrow$ \boxed{\Delta E_{int} = 0} $\rightarrow$ closed curve on PV diagram ($\approx$ ellipse)
+
+\section{Adiabatic Process}
+
+No energy enters or leaves system $\rightarrow$ \boxed{Q = 0}. By thermal insulation, or fast process (\hl{short time})
+
+$$\Delta E_{int} = W$$
+
+(+ve) work done goes to increasing heat
+
+\section{Isothermal process}
+
+Process occuring at \hl{constant temperature}
+
+$$\Delta E_{int} = 0 \qquad \Rightarrow \qquad Q = -W$$
+
+Energy entering system must leave as heat (cooling/heating required to keep constant temperature). Hyperbolic curve on PV diagram
+
+$$W = nRT (\ln{\frac{V_i}{V_f}})$$
+
+$$P_i V_i = P_f V_f$$
+
+\section{Isobaric process}
+
+Process occuring at \hl{constant pressure}. Rectangular PV diagram
+
+$$W = -P (V_f - V_i)$$
+
+\section{Isovolumetric process}
+
+$$W = -\int P \; dV = 0 \qquad \Rightarrow \qquad \Delta E_{int} = Q$$
+
+All energy to increase heat
+
+
+\end{spacing}
+
+\end{document}

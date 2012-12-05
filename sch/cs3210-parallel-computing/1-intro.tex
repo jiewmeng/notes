@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{ Intro to Parallel Computing }}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Intro}
+
+\begin{itemize*}
+	\item \textbf{Parallel Processing}: simultaneous use multiple processing elements to solve problem fast
+	\item \textbf{Processing Elements (PE)}:
+		\begin{itemize*}
+			\item Single Processor, multiple Cores
+			\item Simple Computer, multiple processors
+			\item Many computers, connected via network
+			\item Combination of above 
+		\end{itemize*}
+	\item Problem need to be \textbf{partitioned} into sufficient \textbf{independent parts} for execution on \textbf{parallel PE's}
+\end{itemize*}
+
+\section{Serial Computing}
+
+\includegraphics[scale=0.7]{serial-computing.png}
+
+\begin{itemize*}
+	\item $\textbf{Problem} \Rightarrow \textbf{discrete series of instructions}$
+	\item Executed in series (1 at a time)
+\end{itemize*}
+
+\section{Parallel Computing}
+
+\includegraphics[scale=0.7]{parallel-computing.png}
+
+\begin{itemize*}
+	\item $\textbf{Problem} \Rightarrow \textbf{Discrete tasks}$
+	\item Solved concurrently
+	\item Instructions of each part execute in parallel on different PEs
+\end{itemize*}
+
+\section{Von Neumann Computation Model}
+
+\includegraphics[scale=0.7]{von-neumann-comp-model.png}
+
+\section{Why Parallel Computing}
+
+Exploits large number of PEs that communicate and coorperate to \textbf{solve large problems fast}
+
+\textbf{Primary reasons}
+
+\begin{itemize*}
+	\item Overcome limits of serial computing
+	\item Save (wall clock) time
+	\item Solve large problems
+\end{itemize*}
+
+\textbf{Secondary reasons}
+
+\begin{itemize*}
+	\item Take advantage of non-local 
+	\item Cost savings - use multiple cheaper commoditized computing resources
+	\item Overcome memory constraints
+\end{itemize*}
+
+\section{How?}
+
+\begin{itemize*}
+	\item Work hard (serial)
+	\item Work smart (optimize/algorithms)
+	\item Get help (go parallel) 
+\end{itemize*}
+
+\section{Parallel Computing Basics}
+
+\includegraphics[scale=0.7]{problem-decomposition.png}
+
+\subsection{Decomposition}
+
+\begin{itemize*}
+	\item \textbf{Potential parallelism} in problem dictates how it should be split
+	\item \textbf{Granulatity}: size of tasks
+\end{itemize*}
+
+\subsection{Tasks}
+
+\begin{itemize*}
+	\item \textbf{Scheduling}: tasks $\Rightarrow$ processes/threads
+	\item \textbf{Mapping}: processess/threads $\Rightarrow$ cores/processors
+\end{itemize*}
+
+\subsection{Dependencies \& Coordination}
+
+\begin{itemize*}
+	\item Dependencies constrain scheduling
+	\item To execute correctly, syncronization \& coordination needed
+\end{itemize*}
+
+\subsection{Performance}
+
+\begin{itemize*}
+	\item Throughput vs time
+	\item Parallel execution time = Computation time + (data exchange \& scynronization time)
+	
+\end{itemize*}
+
+\subsection{Challenges}
+
+\begin{itemize*}
+	\item Optimize execution resources (less idle)
+	\item How to share memory correctly
+	\item Automate extraction of parallelism: compilers, language tooling
+	\item Verification of correctness
+	\item Debugging
+	\item Performance monitoring 
+\end{itemize*}
+
+\end{spacing}
+
+\end{document}

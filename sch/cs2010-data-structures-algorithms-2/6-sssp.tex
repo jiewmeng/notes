@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Single Source Shortest Path (SSSP)}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Modified BFS ($O(V+E)$)}
+
+Works on unweighted DAG only
+
+\section{Bellman Ford ($O(VE)$)}
+
+\begin{verbatim}
+// init SSSP
+dist = new int[V]
+dist.fill(INF) // all distances default to INF
+dist[src] = 0
+
+foreach v in V // O(V)
+    foreach e in E // O(E)
+        // relax
+        if (dist[e.to] > dist[e.from] + e.weight): 
+            dist[e.to] = dist[e.from] + e.weight
+\end{verbatim}
+
+At the end of run, \texttt{dist[v]} is shortest path from \texttt{src} to \texttt{v}: if no negative edge weight exists. 
+
+\textbf{To check for negative cycle}
+
+After Bellman Ford, run 
+
+\begin{verbatim}
+foreach e in E // O(E)
+    if (dist[e.to] > dist[e.from] + w[u, v])
+        negative cycle exists 
+\end{verbatim}
+
+\section{Original Dijkstra's ($O((V+E) \log{V})$)}
+
+Does not work with negative edge weights
+
+\begin{verbatim}
+foreach v in vertices(G)
+    PQ.enqueue({ v, INF }) // all dist defaults to INF (sorted by weight)
+PQ.set(src, 0) // except src
+while (PQ.size() > 0)
+    { v, weight } = PQ.dequeue() // get vertex with smallest dist
+    relax each neighbour edge of v 
+\end{verbatim}
+
+
+\section{Modified Dijkstra's ($O((V+E) \log{V})$)}
+
+\begin{verbatim}
+dist = new int[V]
+dist.fill(INF)
+dist[src] = 0
+PQ.enqueue({ dist[src], src }) 
+while (!PQ.empty())
+	{ d, v } = PQ.dequeue()
+	if (d == dist[v]) // ensure its the latest known value
+	    foreach (neighbourEdge to v)
+	        if (dist[neighbour] > dist[v] + neighbourEdge.weight)
+	            dist[neighbour] = dist[v] + neighbourEdge.weight)
+	            PQ.enqueue({ dist[neighbour], neighbour })
+\end{verbatim}
+
+
+\section{DFS/BFS for Trees ($O(V)$)}
+
+Only one path from 1 vertex to another so DFS works?
+
+\section{1 pass Bellman Ford for DAG ($O(V+E)$)}
+
+Use $O(V+E)$ DFS to get toposort. Then do pass of Bellman Ford
+
+\end{spacing}
+
+\end{document}

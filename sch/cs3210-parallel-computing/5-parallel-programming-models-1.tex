@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Parallel Programming Models}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Parallel Programming Models}
+
+\subsection{Classification}
+
+\begin{itemize*}
+	\item \textbf{Level of parallelism}: instruction, statement, procedural levels or parallel loops
+	\item \textbf{Implicit/Explicit}
+	\item \textbf{Processes/Threads}
+	\item \textbf{Execution Mode}: SIMD, SPMD, Sync/Async
+	\item \textbf{Communication modes}: Message passing/Shared variables
+	\item \textbf{Syncronization mechanisms}
+\end{itemize*}
+
+\subsection{Program Parallelization}
+
+\includegraphics[scale=0.7]{parallelization.png}
+
+\includegraphics[scale=0.6]{parallelization-example.png}
+
+\subsubsection{Decomposition}
+
+\begin{itemize*}
+	\item Sequential algorithm split into tasks/dependencies. Where task is a sequence of computations executed by single processor/core
+	\item Static decomposition: program start/compile time
+	\item Dynamic decomposition: during execution
+	\item Goal
+		\begin{itemize*}
+			\item enough tasks to keep cores busy
+			\item tasks $\ge$ cores
+			\item Size of task $>>$ overhead of parallelism
+		\end{itemize*}
+\end{itemize*}
+
+\subsubsection{Scheduling}
+
+\begin{itemize*}
+	\item Assignment of tasks to processes/threads (static/dynamic)
+	\item Goal 
+		\begin{itemize*}
+			\item Load balancing (of computations/memory access (shared mem.)/communications (distributed mem.)) among processes/threads
+			\item Efficient execution order
+		\end{itemize*}
+\end{itemize*}	
+
+
+\subsubsection{Mapping}
+
+\begin{itemize*}
+	\item Assignment of processes/threads to execution units (cores/processors)
+	\item Goal 
+		\begin{itemize*}
+			\item Balance utilization of execution units
+			\item Minimize communications among processors
+		\end{itemize*}
+\end{itemize*}	
+
+\section{Levels of Parallelism}
+
+\includegraphics[scale=0.7]{levels-of-parallelism.png}
+
+\subsection{Instruction parallelism}
+
+Multiple instruction, but data dependencies inhibits parallel execution
+
+\begin{itemize*}
+	\item \textbf{Flow dependency ($W \rightarrow R$)}
+	\item \textbf{Sequential consistency}: see lecture 3: sequential consistency
+\end{itemize*}
+
+\textbf{Data dependency graph}
+
+\includegraphics[scale=0.7]{dep-graph.png}
+
+\subsection{Data parallelism}
+
+Same operation used for different data (SIMD)
+
+MIMD/SPMD means one program executed by all processors in parallel using shared/distibuted memory
+
+\subsection{Loop parallelism}
+
+When no dependency between iterations of loop
+
+\subsubsection{forall}
+
+Think: each assignment in its only loop, executed before next assignment is run
+
+\begin{verbatim}
+forall (i = 1:4)
+    a(i) = a(i) + 1
+    b(i) = a(i-1) + b(i+1)
+\end{verbatim}
+
+becomes
+
+\begin{verbatim}
+for (i = 1:4)
+    a(i) = a(i) + 1
+for (i = 1:4)
+    b(i) = a(i-1) + a(i+1)
+\end{verbatim}
+
+\subsubsection{dopar}
+
+Iterations executed in parallel. Updates in 1 iteration transparent to others. 
+
+\subsubsection{doall}
+
+
+\subsection{Functional/Task Parallelism}
+
+\begin{itemize*}
+	\item Independent tasks can be executed in parallel
+\end{itemize*}
+
+\section{Parallel Programming Patterns}
+
+\subsection{Fork-join}
+
+\begin{itemize*}
+	\item Create children threads, which work in parallel, with \texttt{fork}
+	\item (Parent) Thread waits for children using \texttt{join} 
+\end{itemize*}
+
+\subsection{parbegin, parend}
+
+\begin{itemize*}
+	\item Similar to fork/join?
+\end{itemize*}
+
+\subsection{SPMD, SIMD}
+
+\begin{itemize*}
+	\item SIMD: single instruction executed sequentially by different threads on different data
+	\item SPMD: Same program on different processors, but on different data. Threads work asynchronously with each other
+\end{itemize*}
+
+\subsection{Master-Slave/Worker}
+
+\begin{itemize*}
+	\item Master assigns work to workers
+	\item Master responsible for coordination, initialization, output etc (bottleneck)
+\end{itemize*}
+
+\subsection{Client-Server}
+
+\begin{itemize*}
+	\item "Multiple program, multiple data"
+	\item Server compute requests from multiple clients concurrently
+\end{itemize*}
+
+\subsection{Pipelining}
+
+\begin{itemize*}
+	\item Data partitioned into stream of data elements flows through pipeline threads
+\end{itemize*}
+
+\subsection{Task pools}
+
+\begin{itemize*}
+	\item Threads fixed (created statically)
+\end{itemize*}
+
+\subsection{Producer-Consumer}
+
+\begin{itemize*}
+	\item Producer produce data used as input to consumer
+\end{itemize*}
+
+\end{spacing}
+
+\end{document}

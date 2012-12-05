@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS2010 - 2 - Balanced BST}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Height of a Sub-Tree}
+
+Max number of edges in tree
+
+\begin{itemize*}
+	\item Empty tree: -1
+	\item else: max(left.height, right.height) + 1
+\end{itemize*}
+
+\section{Height Balanced}
+
+\texttt{bf(node) = node.left.height - node.right.height}
+
+Tree is height balanced if \texttt{|bf(root)| $\le$ 1}
+
+\section{Rotations}
+
+\subsection{Left Rotate}
+
+\begin{verbatim}
+rotateLeft(node) // node.left != null
+    newRoot = node.right
+    newRoot.parent = node.parent
+    node.parent = newRoot
+    node.right = newRoot.left
+    if (newRoot.left != null) newRoot.left.parent = node
+    newRoot.left = node
+    // update height of node and newNode
+    return newNode
+\end{verbatim}
+
+\subsection{Possible rotations}
+
+\subsubsection{Left-Left}
+
+\begin{verbatim}
+if (bf(node) == 2 && bf(node.right) == 1) 
+    rightRotate(node) 
+\end{verbatim}
+
+\subsubsection{Right-Right}
+
+\begin{verbatim}
+if (bf(node) == -2 && bf(node.left) == -1) 
+    leftRotate(node) 
+\end{verbatim}
+
+\subsubsection{Right-Left}
+
+\begin{verbatim}
+if (bf(node) == -2 && bf(node.right) == 1) 
+    rightRotate(node.right)
+    leftRotate(node) 
+\end{verbatim}
+
+\subsubsection{Left-Right}
+
+\begin{verbatim}
+if (bf(node) == 2 && bf(node.left) == -1) 
+    leftRotate(node.left)
+    rightRotate(node) 
+\end{verbatim}
+
+\section{Insert}
+
+Just insert, then walk up tree checking balance factor. When $bf(node) == \pm 2$, rebalance. 
+
+\end{spacing}
+
+\end{document}

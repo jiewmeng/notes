@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{PC1221 - Vectors}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{2D Forces}
+
+\includegraphics{vector-forces.png}
+
+$F_{1} = - F_1(\cos{y})i + F_1(\sin{y})j$
+
+$F_{2} = F_2(\cos{x})i + F_2(\sin{x})j$
+
+$$\begin{aligned}
+F_{res} &=  F_1 + F_2 \\
+&= - F_1(\cos{y})i + F_1(\sin{y})j + F_2(\cos{x})i + F_2(\sin{x})j \\
+&= (F_2(\cos{x}) - F_1(\cos{y}))i + (F_1(\sin{y}) + F_2(\sin{x}))j
+\end{aligned}$$
+
+\section{Useful/Identities}
+
+$\cos{(-\theta)} = \cos{(\theta)}$
+
+$\sin{(-\theta)} = -\sin{(\theta)}$
+
+...
+
+\end{spacing}
+
+\end{document}

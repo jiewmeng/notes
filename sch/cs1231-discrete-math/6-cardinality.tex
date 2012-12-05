@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS1231 - Cardinality}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Cardinality}
+
+\begin{itemize*}
+	\item Count of elements in set
+	\item \textbf{\hl{Bijection $\Rightarrow$ Same cardinality}}
+		\begin{enumerate*}
+			\item (Injective) $f(m) = f(n) \Rightarrow m = n$
+			\item (Surjective) $\forall y \in Y$, show that $\exists x \in X$ such that $f(x) = y$
+		\end{enumerate*}
+\end{itemize*}
+
+\subsection{Cardinality Relation}
+
+Is equivalence relation 
+
+\begin{itemize*}
+	\item Reflexive: $|A| = |A|$
+	\item Symmetric: $|A| = |B| \Rightarrow |B| = |A|$
+	\item Transitive: $(|A| = |B| \wedge |B| = |C|) \Rightarrow |A| = |C|$
+\end{itemize*}
+
+\section{Countably infinite}
+
+\begin{itemize*}
+	\item Set is countably infinite if $|S| = \mathcal{N}_0 = |Z^+|$
+
+	\item If a set can be \textbf{listed}, its countably infinite (prop. 9.3.4)
+
+	\item If $A$ and $B$ is countably infinite, then so is $A \times B$ (since they can be listed)
+
+	\item (Generalized) The cartesian product of many countably infinite sets is also countably infinite (prop. 9.3.6)
+	
+	\item Union of countably many countable sets is countable (prop. 9.3.7)
+	
+	\item Subset of a countable set is countable
+	
+	\item Superset of an uncountable set is uncountable
+\end{itemize*}
+
+\subsection{$\mathbb{Q}$ is countable}
+
+\begin{enumerate*}
+	\item $\mathbb{Q}^+$, $\frac{a}{b}$, can be expressed as $<a, b>$. Where $a, b \in \mathbb{Z}^+$ and $a \perp b$ (unique representation of $\mathbb{Q}^+$)
+	\item $\mathbb{Q}^+ \subset \mathbb{Z^+} \times \mathbb{Z^+}$
+	\item Therefore, $\mathbb{Q}^+$ is countable (subset of a countable set)
+	\item $\mathbb{Q}^-$, similar to $\mathbb{Q}^+$, can be expressed as $<-m, n>$
+	\item Theres a bijection $f(<-m, n>) = <m, n>$ thus $\mathbb{Q}^-$ is countable (same cardinality if theres a bijection)
+	\item ${<0, 1>}$ is countable (1 element)
+	\item $\mathbb{Q}^+ \cup \mathbb{Q}^- \cup <0, 1>$ is countable (union of countable sets is countable)
+\end{enumerate*}
+
+\subsection{$\mathbb{R}$ is uncountable}
+
+Cantor's argument
+
+\subsection{Injection but no surjection $\rightarrow$ larger cardinality}
+
+If theres an injection $f : A \rightarrow B$ but no surjection, then $|A| < |B|$
+
+\subsection{Cardinality of power set larger than set}
+
+$$|A| < |\mathcal{P}(A)|$$
+
+\subsection{(Theroem 9.4.6)}
+
+$$|\mathbb{R}| = |\mathcal{P}(\mathbb{Z}^+)|$$
+
+\end{spacing}
+
+\end{document}

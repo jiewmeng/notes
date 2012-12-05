@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Functions}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Function (dfn 6.1.1)}
+
+All elements of Domain can only have 1 outgoing arrow
+
+$$\forall x \in S \; 
+\exists y \in T \; 
+(x \; f \; y \wedge 
+(\forall z \in T \; 
+(x \; f \; z \Rightarrow y = z)))$$
+
+OR 
+
+$$\forall x \in S \;
+\exists! y \in T (x \; f \; y)$$
+
+
+\section{Injective}
+
+All elements in CoDomain have at most 1 incoming arrow
+
+$$\forall y \in T \; 
+\forall x_1, x_2 \in S \; 
+((f(x_1)=y) \wedge (f(x_2) = y)) \Rightarrow x_1 = x_2$$
+
+\section{Surjective}
+
+All elements in CoDomain have at least 1 incoming arrow
+
+$$\forall y \in T \; 
+\exists x \in S \;
+(f(x) = y)$$
+
+\section{Bijective}
+
+Injective \& Surjective. All elements in Domain have exactly 1 image, same vice versa
+
+\begin{itemize*}
+	\item (prop 6.1.12) If $f$ is bijective, $f^{-1}$ is bijective
+\end{itemize*}
+
+\section{Composition}
+
+$$(g \circ f) (x) \Leftrightarrow g(f(x))$$
+
+
+\end{spacing}
+
+\end{document}

@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1.25cm, bottom=2cm]{geometry}
+
+\title{\textbf{CS1231 - 1 - Logic}}
+\date{}
+
+\setlength{\parindent}{0cm}
+\setlength{\itemsep}{0cm}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{setspace}
+\usepackage{color, soul}
+
+\begin{document}
+
+\maketitle
+\begin{spacing}{1.5}
+
+\section{Proofs}
+
+\begin{itemize*}
+	\item \hl{Direct}
+	\item Equivalence (contrapositive, $\neg p \Rightarrow \neg q, p \Rightarrow q$)
+	\item Exhaustion (by cases)
+	\item Construction
+	\item \hl{Counter Example}
+	\item \hl{Contradiction}
+	\item Contrapositive
+	\item \hl{Induction} (Base case, induction hypothesis)
+	\item \hl{Combinatorial}
+\end{itemize*}
+
+\section{Propositional Logic}
+
+\begin{itemize*}
+	\item Negation ($\neg$)
+	\item Conjunction/And ($\wedge$)
+	\item Disjunction/Or ($\vee$)
+	\item Exclusive disjunction/XOR ($\bigoplus$)
+	\item Conditional/If-Then/Implies ($\Rightarrow$)
+		\begin{itemize*}
+		    \item $p \Rightarrow q$
+	    		\begin{itemize}
+			        \item $p$ - premise
+			        \item $q$ - consequence
+		        \end{itemize}
+		    \item Converse (of $p \Rightarrow q$ is $q \Rightarrow p$)
+		    \item Contrapositive (of $p \Rightarrow q$ is $\neg p \Rightarrow \neg q$)
+		    \item[]
+				\begin{tabular}{ll | l}
+					p & q & $p \Rightarrow q$ \\
+					\hline
+					0 & 0 & 1 \\
+					0 & 1 & 1 \\
+					1 & 0 & 0 \\
+					1 & 1 & 1 
+				\end{tabular}
+    	\end{itemize*}
+	\item Bi-conditional ($\Leftrightarrow$)
+		\begin{quote}
+			\begin{tabular}{ll | l}
+				p & q & $p \Leftrightarrow q$ \\
+				\hline
+				0 & 0 & 1 \\
+				0 & 1 & 0 \\
+				1 & 0 & 0 \\
+				1 & 1 & 1 
+			\end{tabular}
+		\end{quote}
+		
+	\item True ($\top$)
+	\item False ($\perp$)
+\end{itemize*}
+
+\subsection{Precedence (High to low)} 
+
+$\neg \qquad \bigoplus \qquad \vee \qquad \wedge \qquad \Rightarrow \qquad \Leftrightarrow$
+
+\subsection{Demorgan's law (Negation of AND/OR)}
+
+$~(p \vee q) \equiv ~p \wedge ~q, \qquad ~(p \wedge q) \equiv ~p \vee ~q$
+
+\vspace{0.6cm}
+
+\begin{tabular}{cc | cc | ccc | ccc}
+p & q & $\neg p$ & $\neg q$ & $p \vee q$ & $\neg (p \vee q)$ & $\neg p \wedge \neg q$ & $p \wedge q$ & $\neg (p \wedge q)$ & $\neg p \vee \neg q$ \\
+\hline 
+0 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 1 \\ 
+0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 1 \\
+1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+\end{tabular}
+
+\section{Predicate Logic}
+
+\texttt{odd(n)} $\Rightarrow$ n is odd
+
+\texttt{odd('$\times$'('$+$'(3, 2), 5))} $\Rightarrow$ $(3+2) \times 5$ is odd
+
+\subsection{Quantifiers}
+
+\begin{tabular}{l | l}
+$\forall$ & For all \\
+$\exists$ & There exists
+\end{tabular}
+
+$F[t/X] \Rightarrow $ is Formula, $F$, where we substitude $X$ with $t$
+
+\section{Post Systems}
+
+\begin{itemize*}
+	\item Alphabet/symbols $\rightarrow$ words
+	\item Axioms: collection of words
+	\item Inferance rules: $P_1, ... , P_n \vdash P_{n+1} $, where $P_i$ are word patterns containing variables
+	\item $A \vdash B$: A proves B
+\end{itemize*}
+
+\underline{Example}: 
+
+Given:
+
+\begin{itemize*}
+	\item Alphabet: ${A, B, C}$
+	\item Axioms: $A, BC$
+	\item Rules: $BX \vdash XX$, $A,XX \vdash XBA$
+\end{itemize*}
+
+Prove CBA
+
+\begin{itemize*}
+	\item BC (Axiom)
+	\item CC ($BX \vdash XX$)
+	\item A, Axiom
+	\item $A, CC \vdash CBA$
+	\item CBA
+\end{itemize*}
+
+Assume BB. Then prove BABA
+
+\begin{itemize*}
+	\item BB (Assumption)
+		\begin{itemize*}
+			\item A (Axiom)
+			\item $A, BB \vdash BBA (A,XX \vdash XBA)$
+			\item $BBA \vdash BABA (BX \vdash XX)$
+		\end{itemize*}
+\end{itemize*}
+
+Consider discharge rule $(XX \vdash XAXA) \vdash XA$
+
+\begin{itemize*}
+	\item ... continue from above ... $BB \vdash BABA$
+	\item $(BB \vdash BABA) \vdash BA ((XX \vdash XAXA) \vdash XA)$
+\end{itemize*}
+
+\section{Natural Deduction}
+
+\begin{itemize*}
+	\item $A, B \vdash A \wedge B$ \qquad (Conjuction introducation)
+	\item $(A \wedge B) \vdash A, \quad (A \wedge B) \vdash B$ \qquad (Conjunction elimination)
+	\item $A \vdash (A \vee B), \quad B \vdash (A \vee B)$ \qquad (Disjuction introduction)
+	\item $(A \Rightarrow X, B \Rightarrow X, A \vee B) \vdash X$ \qquad (Disjunction elimination)
+	\item $\neg \neg A = A$ \qquad (Double negation)
+	\item $(A \Rightarrow (B \wedge \neg B)) \vdash \neg A$ \qquad (Negation introduction)
+	\item $(A \vdash B) \vdash (A \Rightarrow B)$ \qquad (Implication introduction)
+\end{itemize*}
+
+\subsection{Others}
+
+\textbf{$(A \wedge B) \vdash (B \wedge A) $, Conjunction Commutativity}
+
+\begin{enumerate*}
+	\item $A \wedge B$ \qquad (Premise)
+	\item A \qquad ($A \wedge B \vdash A)$
+	\item B \qquad ( $A \wedge B \vdash B)$
+	\item $B \vdash A \qquad (B, A \vdash B \wedge A)$ 
+\end{enumerate*}
+
+\textbf{$A \vdash \neg \neg A$, Double negation introduction}
+
+\begin{enumerate*}
+	\item $F_1$, (premise)
+	\item Assume $\neg F_1$
+		\begin{enumerate*}
+			\item $F_1 \wedge \neg F_1$, (conjuction introduction with 1 \& 2)
+		\end{enumerate*}
+	\item $\neg F_1 \Rightarrow F_1 \wedge \neg F_1$, (implication introduction of 2 \& 2.1)
+	\item $\neg \neg F_1$, (negation introduction with 3)
+\end{enumerate*}
+
+\textbf{$F_1, \neg F_1 \vdash F_2$, Negation elimination}
+
+\textbf{$F_1, F_1 \Rightarrow F_2 \vdash F_2$, Implication Elimination/Modus Ponens}
+
+\begin{enumerate*}
+	\item $F_1$, (premise)
+	\item $F_1 \Rightarrow F_2$, (premise)
+	\item $F_1 \vee F_1$, (disjunction introduction with 1 \& 1)
+	\item $F_2$ by disjunction elimination with 3, 2, 2
+\end{enumerate*}
+
+\section{Propositional Calculus}
+
+\begin{itemize*}
+	\item Interpretation (I) is mapping of propositions to truth values
+		\begin{itemize*}
+			\item \textbf{Logical Consequence ($vDash$)}
+		\end{itemize*}
+\end{itemize*} 
+
+
+\section{Boolean Algebra}
+
+\begin{itemize*}
+	\item \textbf{Identity of $\times$}: $x \times 1 - x$
+	\item \textbf{Identity of plus}: $x + 0 = x$
+	\item \textbf{Complementation of $\times$}: $x \times \overline{x} = 0$
+	\item \textbf{Complementation of +}: $x + \overline{x} = 1$
+	\item \textbf{Associativity of $\times$}: $x \times (y \times z) = (x \times y) \times z$
+	\item \textbf{Associativity of +}: $x + (y + z) = (x + y) + z$
+	\item \textbf{Commutativity of $\times$}: $x \times y = y \times z$
+	\item \textbf{Commutativity of +}: $x + y = y + z$
+	\item \textbf{Distributivity of $\times$ over +}: $x \times (y + z) = (x \times y) + (x \times z)$
+	\item \textbf{Distributivity of + over $\times$}: $x + (y \times z) = (x + y) \times (x + z)$
+	\item \textbf{Idempotence of $\times$}: $x \times x = x$
+	\item \textbf{Idempotence of +}: $x + x = x$
+	\item \textbf{Annihilator of $\times$}: $x \times 0 = 0$
+	\item \textbf{Annihilator of +}: $x + 1 = 1$
+	\item \textbf{Absorbsion of $\times$}: $x \times (x + y) = x$
+	\item \textbf{Absorption of +}: $x + (x \times y) = x$
+	\item \textbf{Double negation}: $\overline{\overline{x}} = x$
+	\item \textbf{De Morgan's Law for $\times$}: $\overline{x \times y} = \overline{x} + \overline{y}$
+	\item \textbf{De Morgan's Law for +}: $\overline{x + y} = \overline{x} \times \overline{y}$
+\end{itemize*}
+
+\end{spacing}
+\end{document}

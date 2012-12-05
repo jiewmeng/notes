@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.25cm, bottom=2cm]{geometry}
+
+\title{\textbf{PC1221 - 1 - Intro}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Basic Quantities}
+
+\begin{itemize}
+	\item Length (m)
+	\item Mass (kg)
+	\item Time (s)
+\end{itemize}
+
+\subsection{Prefix}
+
+\begin{tabular}{ll | ll | ll}
+pico & $10^{-12}$ & nano & $10^{-9}$ & micro & $10^{-6}$ \\
+milli & $10^{-3}$ & centi & $10^{-2}$ & deci & $10^{-1}$ \\
+kilo & $10^{3}$ & mega & $10^{6}$ & giga & $10^{9}$ \\
+tera & $10^{12}$ \\
+\end{tabular}
+
+\section{Trigo}
+
+$$\sin{A} = \frac{opp}{hyp} \qquad \cos{A} = \frac{adj}{hyp} \qquad \tan{A} = \frac{opp}{adj} = \frac{\sin{A}}{\cos{A}}$$
+
+\section{Derived Quantities}
+
+\subsection{Density ($\rho$, $kg/m^3$)}
+
+$$\rho = \frac{m}{v}$$
+
+\subsection{Atomic Mass ($u$)}
+
+$$1u = 1.6605387 \times 10^{-27} kg$$
+
+\section{Conversion Technique}
+
+$$\begin{aligned}
+1 in &= 2.54 cm \\
+15 in &= x cm \\
+1x &= 2.54 \times 15 \\
+x &= 38.1 cm
+\end{aligned}$$
+
+\section{Significant Figures}
+
+\begin{itemize}
+	\item Decimals: 
+		\begin{itemize}
+			\item leading 0 unsignificant. eg. 0.0025 has 2 s.f.
+			\item others are significant eg. 10.0 has 3 s.f.
+		\end{itemize}
+	\item Scientific Notation
+		\begin{itemize}
+			\item $1.5 \times 10^{3}$, 2 s.f.
+			\item $1.500 \times 10^{3}$, 4 s.f.
+		\end{itemize}
+\end{itemize}
+
+\subsection{Operations}
+
+\begin{itemize}
+	\item \textbf{Multiply/Divide}: Lowest s.f. eg. $25.57 \times 2.45 = 62.6$ because $2,45$ has 3 s.f.
+	\item \textbf{Add/Subtract}: Least d.p. eg. 135 + 3.251 = 138 (135 has no d.p.)
+\end{itemize}
+
+\end{spacing}
+
+\end{document}

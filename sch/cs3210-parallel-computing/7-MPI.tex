@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{MPI}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Message Passing Programming Model}
+
+\begin{itemize*}
+	\item Distributed address space
+	\item Processes exchange local data
+	\item Point-to-Point or Global/Collective
+	\item Explicit Parallelism - Programmer specify parallelism
+	\item SPMD
+\end{itemize*}
+
+\subsection{Views}
+
+\begin{tabular}{p{2cm} | p{5.5cm} p{5.5cm}}
+\textbf{Local} & \textbf{Blocking} - user allowed to refuse resources specified in call & \textbf{Non-Blocking} - procedure returns before operation completes, and before user is allowed to reuse resources specifed in call \\
+\textbf{Global} & \textbf{Synchronous} - Operation does not complete until both processes started communication operation & \textbf{Asyncronous} - No coordination between parties \\
+\end{tabular}
+
+
+\end{spacing}
+
+\end{document}

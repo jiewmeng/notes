@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb, empheq}
+\usepackage{hyperref}
+\usepackage{color}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Energy \& Energy Transfer}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\begin{itemize*}
+	\item Useful when \textbf{\color{red}{force is not constant}}
+	\item $+W$ when energy is transfered into system
+	\item $A \cdot B = A B \cos{\theta}$
+		\begin{itemize*}
+			\item $A \cdot B = A_x B_x + A_y B_y + A_z B_z$
+			\item $A \cdot B = B \cdot A$
+			\item $A \cdot (B + C) = A \cdot B + A \cdot C$
+		\end{itemize*}
+	\item \textbf{\color{red}{Work $\approx$ Energy}}
+	\item \textbf{\color{red}{SI unit of Work \& Energy is $J$}}
+\end{itemize*}
+
+\section{Work ($J$ OR $N \cdot m$)}
+
+\begin{equation}
+	\boxed{W = F \Delta x}
+\end{equation}
+
+\begin{equation}
+	\boxed{W = \int F {dx}}
+\end{equation}
+
+\section{Hooke's Law (Spring)}
+
+\begin{equation}
+	\boxed{F_{spring} = -kx}
+\end{equation}
+
+\begin{equation}
+	\boxed{PE_{spring} = \frac{1}{2} kx^2}
+\end{equation}
+
+\begin{itemize*}
+	\item $x$ is position wrt. equilibrium
+	\item $k$ is spring constant
+\end{itemize*}
+
+\section{Kinetic Energy}
+
+\begin{equation}
+	\boxed{K = \frac{1}{2} m v^2}
+\end{equation}
+
+\section{Work Energy Theorm}
+
+Think: Energy is conserved
+
+\begin{equation}
+	\boxed{\sum W = K_f - K_i = \Delta K}
+\end{equation}
+
+\section{Internal Energy ($E_{int}$)}
+
+Energy associated with objects \textbf{temperature}. \textbf{Friction} does work to increase internal energy
+
+\section{Potential Energy}
+
+\begin{itemize*}
+	\item Elastic
+	\item Gravatational 
+	\item Electrical
+\end{itemize*}
+
+\begin{equation}
+	\boxed{PE = mgh}
+\end{equation}
+
+\section{Power ($W$ OR $J/s$)}
+
+Think: How fast energy is used
+
+\begin{empheq}[box=\fbox]{align}
+	P 	&= \frac{W}{\Delta t} \\ 
+		&= F \cdot \frac{d}{\Delta t} = F \cdot v
+\end{empheq}
+
+
+
+\end{spacing}
+
+\end{document}

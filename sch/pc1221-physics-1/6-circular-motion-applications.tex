@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Circular Motion \& Applications of Newton's Laws}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Uniform Circular Motion}
+
+$$\sum F = ma_c = m \frac{v^2}{r}$$
+
+\subsection{Conical Pendulum}
+
+\includegraphics[scale=0.8]{conical-pendulum.png}
+
+$v = \sqrt{Lg \sin{\theta} \tan{\theta}}$
+
+\underline{Derivation}
+
+Centripetal Force = $ma = m \frac{v^2}{r} = T \sin{\theta}$ --- (1)
+
+$T \cos{\theta} = mg \qquad \Rightarrow \qquad T = \frac{mg}{\\cos{\theta}}$ --- (2)
+
+Sub (2) into (1)
+
+$\frac{mv^2}{r} = \frac{mg}{\\cos{\theta}} \sin{\theta}$
+
+$\frac{v^2}{r} = g \tan{\theta}$ --- (3) 
+
+$\sin{\theta} = r/L \qquad \Rightarrow \qquad r = L \sin{\theta}$ --- (4)
+
+Sub (4) into (3)
+
+$\frac{v^2}{L \sin{\theta}} = g \tan{\theta} \qquad \Rightarrow \qquad v = \sqrt{Lg \sin{\theta} \tan{\theta}}$
+
+\subsection{Motion on Horizontal Cicrle}
+
+\includegraphics{hor-motion.png}
+
+$T = \frac{mv^2}{r} \qquad \Rightarrow \qquad v = \sqrt{\frac{Tr}{m}}$
+
+\subsection{Horizontal Curve}
+
+\begin{itemize*}
+	\item Static friction ($f_s = \mu_s n$) provides centripetal force
+	\item Max speed of car in curve is $v = \sqrt{\mu g r}$
+		\begin{itemize*}
+			\item $\mu mg = \frac{mv^2}{r} \qquad \Rightarrow \qquad v = \sqrt{\mu g r}$
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Banked Curve}
+
+\includegraphics[scale=0.5]{banked-curve.png}
+
+\begin{itemize*}
+	\item Component of normal force provides centripetal force $\tan{\alpha} = \frac{v^2}{rg}$ 
+		\begin{itemize*}
+			\item $n \cos{\alpha} = mg \qquad \Rightarrow \qquad n = \frac{mg}{\cos{\alpha}}$
+			\item $n \sin{\alpha} = m \frac{v^2}{r} \qquad \Rightarrow \qquad \frac{mg}{\cos{\alpha}} \sin{\alpha} = m \frac{v^2}{r} \qquad \Rightarrow \qquad v = \sqrt{rg \tan{\theta}}$
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Vertical Circle}
+
+\includegraphics[scale=0.5]{vert-circ.png}
+
+\begin{itemize*}
+	\item @Top: $\sum F_y = m (-\frac{v^2}{r}) = n + (-mg)$
+	\item @Bottom: $\sum F_y = m \frac{v^2}{r} = n + (-mg)$
+\end{itemize*}
+
+\section{Centrifugal Force}
+
+Centripetal is inward force. Centrifugal is outward fictitious force
+
+\end{spacing}
+
+\end{document}

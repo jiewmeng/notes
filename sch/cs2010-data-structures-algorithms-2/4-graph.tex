@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Graphs}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\begin{itemize*}
+	\item DAG: Directed graph with no cycles
+	\item Tree: Connected graph with only 1 unique path between any 2 pairs of vertices. $E=V-1$
+	\item Bipartite graph: graph with vertices that can be paritioned into 2 sets, where members of 1 set cannot have edges to another in the same set
+\end{itemize*}
+
+\section{Storage}
+
+\subsection{Adjacency matrix}
+
+\begin{itemize*}
+	\item 2D array, each cell containing 1 or edge weight. eg. \texttt{adjMatrix[i][j]} refers to edge weight of edge connecting i to j
+	\item Space complexity: $O(V^2)$
+\end{itemize*}
+
+\subsection{Adjacency list}
+
+\begin{itemize*}
+	\item \texttt{AdjList[i]} stores list if i's neighbours
+	\item Space complexity: O(V+E)
+\end{itemize*}
+
+\section{Graph transversal}
+
+\subsection{BFS ($O(V+E)$)}
+
+\begin{verbatim}
+visited = new bool[V]
+q.enqueue(src)
+while (q.size() > 0)
+    elem = q.dequeue()
+    foreach (neighbour in neighbours(elem)) // O(E) : adj list
+        if (!visited[neighbour]) // ensures O(V)
+    	    visited[neighbour] = true
+    	    q.enqueue(neighbour) 
+\end{verbatim}
+
+\subsection{DFS ($O(V+E)$)}
+
+\begin{verbatim}
+visited = new bool[V]
+dfs(src)
+
+dfs(v): 
+    visited[v] = true
+    foreach (neighbour in neighbours(v)) // O(E)
+        if (!visited[neighbour]) // ensures O(V)
+            dfs(neighbour)
+\end{verbatim}
+
+\subsection{Topological sort}
+
+\begin{itemize*}
+	\item Linear ordering in \textbf{\hl{DAG}} where each vertex comes before all vertices to which it has outbound edges to
+	\item OR only right arrows on a toposort
+	\item Run DFS, appending to toposort once all edges are processed
+\end{itemize*}
+
+\begin{verbatim}
+visited = new bool[V]
+dfs(src)
+
+dfs(v): 
+    visited[v] = true
+    foreach (neighbour in neighbours(v)) // O(E)
+        if (!visited[neighbour]) // ensures O(V)
+            dfs(neighbour)
+    toposort[] = v
+toposort.reverse() // need to reverse
+\end{verbatim}
+
+
+\end{spacing}
+
+\end{document}

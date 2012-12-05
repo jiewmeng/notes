@@ -1,0 +1,268 @@
+  \documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS3210 - 1 - Processor Architecture \& Memory}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Processor Architecture \& Trends}
+
+\begin{itemize}
+	\item \textbf{Goal}: $\downarrow$ average time for executing instr.
+	\item \textbf{Trends}:
+		\begin{itemize}
+			\item $\uparrow$ Transistors
+				\begin{itemize}
+					\item $\uparrow$ clk. speed $\Rightarrow$ $\uparrow$ speed
+					\item Moore's law: number of transistors doubles every 18-24 months
+				\end{itemize}
+			\item Parallelism w/in single 
+				\begin{itemize}
+					\item At bit level
+						\begin{itemize}
+							\item Word size $\uparrow$ to 64bits
+							\item Improved floating point accuracy
+							\item $\uparrow$ address space
+						\end{itemize}
+					\item \hl{By pipelining}
+						\begin{itemize}
+							\item Partition instructions into steps (FETCH, DECODE, EXECUTE, WriteBack)
+							\item Steps performed by dedicated hardware units (pipeline stages)
+							\item Units work in parallel as long as theres no dependencies between instructions
+							\item \hl{Throughput: 1 instr. per clock cycle}
+						\end{itemize}
+					\item By Multiple Functional Units
+						\begin{itemize}
+							\item Processor use multiple, independent functional units (ALU, FPU, Load/Store, Branch)
+							\item Independent instr. executed in parallel by different functional unit
+						\end{itemize}
+					\item \hl{Process/Thread Level}
+						\begin{itemize}
+							\item \hl{Multi-core on single chip}
+							\item \hl{"Hyper Threading"}: Processor appear to OS as set of logical processor (LP), which stores processor state in separate process resource. Cache, Bus, Functional \& Control units shared between LP, but memory accesses must be coordinated
+						\end{itemize}
+				\end{itemize}
+			\item \hl{Multi\textbf{processors}} (Shared memory)
+			\item \hl{Multi\textbf{computers}} (Distributed memory)
+		\end{itemize}
+\end{itemize}
+
+\section{Flynn's Taxonomy of Parallel Architectures}
+
+\begin{itemize*}
+	\item \textbf{Parallel Computer}: collection of processing elements that communicate \& cooperate to solve large problems fast
+	\item \textbf{MIMD}: Multiple Instruction, Multiple Data
+		\begin{itemize*}
+			\item * CU $\rightarrow$ * PU $\rightarrow$ 1 Shared MEM
+		\end{itemize*}
+	\item \textbf{SIMD}: Single Instruction, Multiple Data
+		\begin{itemize*}
+			\item 1 CU $\rightarrow$ * PU $\rightarrow$ * Local MEM
+		\end{itemize*}
+	\item \st{\textbf{SISD}}: Single Instruction, Single Data 
+		\begin{itemize*}
+			\item 1 CU $\rightarrow$ 1 PU $\rightarrow$ 1 MEM
+		\end{itemize*}
+	\item \st{\textbf{MISD}}: Multiple Instruction, Single Data
+		\begin{itemize*}
+			\item * CU $\rightarrow$ * PU $\rightarrow$ 1 MEM
+		\end{itemize*}
+\end{itemize*}
+
+\section{Memory Organization}
+
+\begin{itemize*}
+	\item Distributed (Multicomputers)
+	\item Shared (Multiprocessors)
+		\begin{itemize*}
+			\item Uniform Memory Access (UMA)
+			\item Non-Uniform Memory Access (NUMA)
+			\item Cache-only Memory Access (COMA)
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Distributed Memory (Multi-Computers)}
+
+
+\begin{center}
+\includegraphics[scale=0.7]{multicomputers.png}
+\end{center}
+
+\begin{itemize*}
+	\item Node contains Processor (P), Memory and perhaps other periphery elements
+	\item Physically distributed memory. Memory on each node is private
+	\item Data exchange via Message Passing
+\end{itemize*}
+
+\subsection{Shared Memory (Multiprocessors)}
+
+\begin{center}
+\includegraphics[scale=0.7]{multiprocessors.png}
+\end{center}
+
+\begin{itemize*}
+	\item Global Memory, Common address space
+	\item Data exchange of shared variables via threads
+	\item Problems: Race conditions, fast access to global memory
+\end{itemize*}
+
+\subsubsection{Uniform Memory Access}
+
+\begin{center}
+\includegraphics[scale=0.65]{uma.png}
+\end{center}
+
+\begin{itemize*}
+	\item Memory equidistant to processors
+	\item Processors connect to memory via Central Bus
+\end{itemize*}
+
+
+\subsubsection{Non Uniform Memory Access}
+
+\begin{center}
+\includegraphics[scale=0.65]{numa.png}
+\end{center}
+
+\begin{itemize*}
+	\item Memory physically distributed
+	\item aka Distributed Shared Memory
+\end{itemize*}
+
+\subsubsection{Cache Coherent NUMA}
+
+\begin{center}
+\includegraphics[scale=0.65]{cc-numa.png}
+\end{center}
+
+\begin{itemize*}
+	\item NUMA with Caches that are kept in sync by cache coherence protocol
+\end{itemize*} 
+
+\subsubsection{Cache Only Memory Access}
+
+\begin{center}
+\includegraphics[scale=0.65]{coma.png}
+\end{center}
+
+\section{Reduce Memory Access Time}
+
+\begin{itemize*}
+	\item Main reason: Memory Wall (Memory access time: ~100-1000 cycles)
+	\item Techniques
+		\begin{itemize*}
+			\item Multithreading
+			\item Cache
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Threading}
+
+\begin{itemize*}
+	\item Thread is a separate control flow which \hl{shares data} with other threads via global address space
+	\item \hl{Interleaved threads hide latency of memory access}
+\end{itemize*}
+
+\subsection{Caching}
+
+\begin{itemize*}
+	\item \hl{Reduce access to slow memory}
+	\item In multiprocessors, multiple caches to reduce latency, but each processor should have coherent 
+	\item \hl{Cache coherancy} problem - read should return most recently written value
+\end{itemize*}
+
+\section{Thread Level Parallelism}
+
+\begin{itemize*}
+	\item Exploit \hl{multiple threads to efficiently use resources on single processor chip}
+	\item Architecture organization: Chip Multiprocessing. 
+	\begin{itemize*}
+		\item \underline{Example}: multiple execution cores on single chip (multicore processor)
+	\end{itemize*}
+\end{itemize*}
+
+\subsection{Multithreading Classification}
+
+\begin{center}
+\includegraphics[scale=0.7]{multithreading-classification.png}
+\end{center}
+
+\subsection{Architecture}
+
+\begin{itemize*}
+	\item Hierarchical
+	\item Pipelined
+	\item Network
+\end{itemize*}
+
+\subsubsection{Hierarchical}
+
+\begin{center}
+\includegraphics[scale=0.8]{mem-hierarchical.png}
+\end{center}
+
+\begin{itemize*}
+	\item Multiple cores share multiple caches
+	\item Cache size $\uparrow$ from leaves (near processor) to root (near memory)
+	\item L1 private, L2 shared
+	\item All cores share common external memory
+	\item Usage: 
+		\begin{itemize*}
+			\item Desktop
+			\item Server
+			\item GPU
+		\end{itemize*} 
+\end{itemize*}
+
+\subsubsection{Pipelined}
+
+\begin{center}
+\includegraphics[scale=0.8]{mem-pipeline.png}
+\end{center}
+
+\begin{itemize*}
+	\item Data elements processed by multiple execution cores in pipelined manner
+	\item Useful when \hl{same computation steps} applied to \hl{long sequence of data elements}
+	\item Usage: Network processors (routers/switches)
+\end{itemize*}
+
+\subsubsection{Networked}
+
+\begin{center}
+\includegraphics[scale=0.8]{mem-network.png}
+\end{center}
+
+\begin{itemize*}
+	\item Cores, local cache \& memory connected via network
+\end{itemize*}
+
+\section{Future Trends}
+
+\begin{itemize*}
+	\item Efficient on chip interconnection
+		\begin{itemize*}
+			\item Bandwidth for data transfer between cores
+			\item Scalable
+			\item Robust to failures
+			\item Energy efficient energy management
+			\item Reduce memory access time
+		\end{itemize*}
+\end{itemize*}
+
+\end{spacing}
+
+\end{document}

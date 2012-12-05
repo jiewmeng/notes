@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=0.5cm]{geometry}
+\usepackage{mdframed}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\newcommand{\hilight}[1]{\colorbox{Dandelion}{#1}}
+
+\begin{document}
+
+\title{PC1221 - Data Analysis}
+\author{Lim Jiew Meng}
+\maketitle
+
+\section{Expressing Uncertainty}
+
+\begin{mdframed}
+$$
+\textrm{best estimated} \pm \textrm{uncertainty} \textrm{ [units]} \\ = x_{best} \pm \delta x \textrm{ [units]}
+$$
+\end{mdframed}
+\vspace{0.5cm}
+
+Example: $1.023 \pm 0.006 m/s^2$
+
+\begin{itemize}
+	\item round \textcolor{blue}{uncertainty} to \textcolor{purple}{1 significant figure}
+	\item round \textcolor{Mulberry}{measurement} to same precision as \textcolor{blue}{uncertainty}
+\end{itemize}
+
+\subsection{Absolute \& Fractional}
+
+\subsubsection{Absolute Uncertainty ($\delta x$)}
+
+Actual amount by which best estimate is uncertain
+
+\subsubsection{Fractional Uncertainty (\large{$\frac{\delta x}{x_{best}}$})}
+
+Significance of uncertainty wrt. best estimated value ($x_{best}$)
+
+\subsection{Accuracy vs Precision}
+
+\subsubsection{Accuracy}
+
+Measure of closeness of \hilight{experimental} values to \hilight{true value}
+
+\subsubsection{Precision}
+
+Measure of closeness of \hilight{repeated measurements}
+
+\subsection{Types}
+
+\subsubsection{Random}
+
+\begin{itemize}
+	\item From unknown and unpredictable variations
+	\item Reduced by taking several measurements
+\end{itemize}
+
+\subsubsection{Systematic}
+
+\begin{itemize}
+	\item Associated with measurement instrument or technique
+	\item Nearly of same sign/direction and magnitude between measurements
+	\item Cannot be eliminated statistically
+\end{itemize}
+
+\section{Significant Figures}
+
+\begin{itemize}
+	\item All digits significant \hilight{except} those whose sole purpose is to \hilight{determine location of decimal place}
+	\item {\bf Add/Subtract}: Use least precise term (decimal point)
+	\item {\bf Multiply/Divide}: Use least significant digits
+\end{itemize}
+
+\section{Experimental Value vs Accepted Value}
+
+Let $E \pm \delta E$ be experimental value with uncertainty, $A$ be accepted value. If $A$ lies between $E \pm \delta E$, experimental value $=$ accepted value within uncertainty
+
+\vspace{0.5cm}
+
+{\bf Percentage discrepancy} quantifies accuracy of measurement 
+
+\vspace{0.5cm}
+
+\begin{mdframed}
+	$$\textrm{Percentage Discrepancy} = \frac{|E-A|}{A} \times 100\%$$
+\end{mdframed} 
+
+\subsection{Compare 2 experimental values}
+
+2 experimental values are equal within uncertainty, as long as theres some overlap between $E_1 \pm \delta E_1$ and $E_2 \pm \delta E_2$
+
+$$\textrm{Percentage Difference} = \frac{|E_1 - E_2|}{|E_1 + E_2|/2} \times 100\%$$
+
+\section{Mean/Average/Best Estimate}
+
+\begin{mdframed}
+	$$\overline{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$$
+\end{mdframed}
+
+\section{Standard Deviation ($\sigma$)}
+
+Quantifies \hilight{spread of data about mean}. Used to compare \hilight{individual value} wrt. \hilight{mean}
+
+\begin{itemize}
+	\item 68.3\% of data lies within $1 \sigma$
+	\item 95.5\% of data lies within $2 \sigma$
+	\item 99.73\% of data lies within $3 \sigma$
+\end{itemize}
+
+\section{Standard Error ($\alpha$)}
+
+Measures \hilight{spread of all means about overall mean}. Used to compare \hilight{mean} wrt. \hilight{true value}
+
+\vspace{0.5cm}
+
+\begin{mdframed}
+$$\alpha = \frac{\sigma}{\sqrt{N}}$$
+\end{mdframed}
+
+\section{Uncertainty Propagation}
+
+\subsection{Add/Subtract}
+
+\begin{mdframed}
+	$$\delta X = \sqrt{(\delta A)^2 + (\delta B)^2}$$
+\end{mdframed}
+
+\subsection{Multiply/Divide}
+
+\begin{mdframed}
+	$$\delta X = X \sqrt{(\frac{\delta A}{A})^2 + (\frac{\delta B}{B})^2}$$
+\end{mdframed}
+
+\section{Linear Least Squares Fit}
+
+Using excel's \texttt{LINEST()}. \href{http://www.youtube.com/watch?v=ECA2VSOhbuU}{YouTube Video}
+
+\end{document}

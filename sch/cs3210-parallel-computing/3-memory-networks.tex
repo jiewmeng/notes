@@ -1,0 +1,368 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+\usepackage{color,soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS3210 - 3 - Memory Hierarchy \& Networks}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Caching}
+
+\begin{itemize*}
+	\item \textbf{Why}: Memory Wall
+	\item Issues: 
+		\begin{itemize*}
+			\item Shared cache: cache coherency
+			\item Shared memory: memory consistency
+		\end{itemize*}
+	\item Levels
+		\begin{itemize*}
+			\item L1: usually not shared
+			\item L2: may/may not be shared
+			\item L3: usually shared
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Terminology}
+
+\begin{itemize*}
+	\item Cache Hit: requested memory belongs to a cache line
+	\item Cache Miss: not in cache, fetch from main memory and block replacement if necessary
+	\item Locality of references:
+		\begin{itemize*}
+			\item Spatial: often access \hl{neighbouring memory} at successive points in time
+			\item Temorial: often access \hl{same memory} at successive points in time 
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Decisions \& Implications}
+
+\begin{itemize*}
+	\item \textbf{Larger Cache size}: $\uparrow$ access time, $\downarrow$ cache miss
+	\item \textbf{Block size}: data transfer between main memory and cache in \hl{fixed size}
+		\begin{itemize*}
+			\item \textbf{Large Block}: $\downarrow$ blocks, $\uparrow$ block replacements
+			\item time(transfer block of x words) < (x $\times$ time(transfer 1 word))
+		\end{itemize*}
+\end{itemize*}
+
+\subsection{Mapping Memory to Cache Blocks}
+
+\begin{itemize*}
+	\item Types: 
+		\begin{itemize*}
+			\item Direct Mapped: 1 to 1
+			\item Fully Associative: 1 to Any
+			\item Set Associative: 1 to Some
+		\end{itemize*}
+\end{itemize*}
+
+\subsubsection{Direct Mapped}
+
+\begin{center}
+	\includegraphics[scale=0.7]{cache-direct.png}
+\end{center}
+
+\begin{center}
+\boxed{
+	$i = \textrm{block } \%  \textrm{ size of cache}$
+}
+\end{center}
+
+\textbf{Trashing} when memory addresses in different memory blocks are mapped to the same cache position are accessed
+
+\subsubsection{Fully Associative}
+
+\begin{center}
+	\includegraphics[scale=0.7]{cache-assoc.png}
+\end{center}
+
+\begin{itemize*}
+	\item Memory stored in any cache position
+	\item Flexibility when loading memory blocks
+	\item Need to search all cache positions
+\end{itemize*}
+
+\subsubsection{Set Associative}
+
+\begin{center}
+	\includegraphics[scale=0.7]{cache-set-assoc.png}
+\end{center}
+
+\begin{itemize*}
+	\item A memory blocked can be mapped to a fixed number of positions
+	\item Cache is partitioned into $v$ sets. Where each set consists of $k = m/v \textrm{ blocks}$
+\end{itemize*}
+
+\subsection{Block Replacement}
+
+\begin{itemize*}
+	\item LRU: replace block not used for longest time
+	\item LFU: replace block used the least
+\end{itemize*}
+
+
+\subsection{Write Policy}
+
+\begin{itemize*}
+	\item Memory in cache
+		\begin{itemize*}
+			\item Write Through
+			\item Write Back
+		\end{itemize*}
+	\item Memory NOT in cache
+		\begin{itemize*}
+			\item Write Allocate
+		\end{itemize*}
+\end{itemize*}
+
+\subsubsection{Write Through}
+
+\begin{itemize*}
+	\item Modification immediately written to memory
+	\item Write buffer used to store pending writes
+	\item Cache \& Memory consistent
+	\item When write buffer is full, need to wait
+\end{itemize*}
+
+\subsubsection{Write Back}
+
+\begin{itemize*}
+	\item Cache changed but memory NOT updated immediately
+	\item Update only on replacement
+	\item Use dirty bit to determine if write necessary
+	\item Fewer write operations to memory
+	\item Memory can contain outdated entries
+\end{itemize*}
+
+\subsubsection{Write Allocate}
+
+\begin{itemize*}
+	\item When memory not in cache
+	\item Memory first brought into cache
+	\item then use write through/back
+\end{itemize*}
+
+\section{Cache coherency problem}
+
+\textbf{Cache coherency} ensures processors has same consistent view of memory via local cache
+
+\textbf{Classification}
+
+\begin{itemize*}
+	\item \textbf{Snooping protocols}: shared broadcast \& write through
+		\begin{itemize*}
+			\item Cache controllers observe all writes to update/invalidate cache block
+		\end{itemize*}
+	\item \textbf{Directory based cache coherence protocols}: no shared broadcast medium
+\end{itemize*}
+
+\subsection{Sequential consistency model}
+
+\begin{itemize*}
+	\item Every processor issues memory operations in \textbf{program order}
+\end{itemize*}
+
+\subsection{Relaxed consistency model}
+
+\begin{itemize*}
+	\item R $\rightarrow$ W: anti-dependence: first uses variable later used by another to store result
+	\item W $\rightarrow$ W: output dependence: 2 instructions use same variable to store result
+	\item W $\rightarrow$ R: flow dependence
+\end{itemize*}
+
+\begin{itemize*}
+	\item Relax W $\rightarrow$ R: Processor can execute R even if preceding W has not completed if theres no data dependency
+	\item Relax W $\rightarrow$ W \& W $\rightarrow$ R: Writes can be completed in different order if theres no data dependency
+	\item Relax everything but provide additional sync mechanisms
+\end{itemize*}
+
+\section{Interconnection Networks}
+
+\textbf{Topology}
+
+\begin{itemize*}
+	\item Direct: static/point2point. Nodes connected directly via fixed physical links
+	\item Indirect: dynamic. Nodes connected via switches/links
+\end{itemize*}
+
+\textbf{Routing}: What path to take
+
+\textbf{Switching strategy}: how to transfer message. How to cut message, how message is forwarded through path
+
+\subsection{Direct}
+
+To reduce transmission time
+
+\begin{itemize*}
+	\item Buffers can be used to decouple send/recv operations
+	\item DMA (direct memory access) controller to decouple communication and processor operations
+\end{itemize*}
+
+To reduce communication time
+
+\begin{itemize*}
+	\item Add routers
+	\item which forwards message without interaction from processors (in nodes)
+\end{itemize*}
+
+\subsection{Properties}
+
+\subsubsection{Diameter}
+
+Max distance between any pair of nodes. Ensure less hops for transmission
+
+\subsubsection{Degree}
+
+Number of direct neighbours. Less hardware overhead
+
+\subsubsection{Bisection bandwidth}
+
+Min edges that can be removed to divide network into equal halves. Larger data throughput
+
+\subsubsection{Node connectivity}
+
+Min nodes that must fail to disconnect network
+
+\subsubsection{Edge connectivity}
+
+Min edges that must fail to disconnect network
+
+Larger connectivity $\rightarrow$ higher reliability
+
+\includegraphics[scale=0.6]{network-properties.png}
+
+\subsection{Indirect Networks}
+
+Reduce hardware costs by sharing switches and links
+
+\begin{itemize*}
+	\item \textbf{Bus}: Only 1 communication at a time
+	\item \textbf{Crossbar}: Very expensive
+	\item \textbf{Multistage (eg. Omega)}: Balanced
+\end{itemize*}
+
+\section{Routing}
+
+Determines a path from source to destination
+
+Desirable properties
+
+\begin{itemize*}
+	\item Fast message transmission
+	\item Load balancing
+\end{itemize*}
+
+Issues
+
+\begin{itemize*}
+	\item Contention: too many messages transmitted via same link
+	\item Congestion: too many messages assigned to a resource $\rightarrow$ message loss
+\end{itemize*}
+
+\subsection{Routing Algorithm Classification}
+
+\subsubsection{Path length}
+
+\begin{tabular}{l | cc}
+& \textbf{Path length} & \textbf{Congestion} \\ 
+\hline
+\textbf{Minimal routing} & $\downarrow$ & $\uparrow$ \\
+\textbf{Non-minimal routing} & $\uparrow$ & $\downarrow$ 
+\end{tabular}
+
+\subsubsection{Network utilization}
+
+\begin{tabular}{l | cc}
+& \textbf{Factors} & \textbf{Network Load} \\ 
+\hline
+\textbf{Deterministic} & src \& dest & Unbalanced \\
+\textbf{Non-minimal routing} & dynamic & Balanced/fault torlerant 
+\end{tabular}
+
+\section{Switching}
+
+\begin{itemize*}
+	\item Determine \hl{whether and how} message is split into \hl{packets}/flits (flow control units)
+	\item How messages/packets forwarded from input to output channel of swicth/router
+\end{itemize*}
+
+Sending processor
+
+\begin{itemize*}
+	\item Message copied to system buffer
+	\item Checksum computed
+	\item Header added to message
+	\item (After sending message) If acknowledgement message arrives, release system buffer. Else resent
+\end{itemize*}
+
+Receving processor
+
+\begin{itemize*}
+	\item Message copied from network interface to system buffer
+	\item Compare checksum. If identical, copy into user buffer (send ACK). Else discard message, message will be resent by sender
+\end{itemize*}
+
+\includegraphics[scale=0.5]{switching-perf.png}
+
+\includegraphics[scale=0.5]{switching-latency.png}
+
+\subsection{Switching strategies}
+
+\begin{itemize*}
+	\item \textbf{Circuit}: path reserved until end of transmission
+		
+		\vspace{0.2cm}
+		\includegraphics[scale=0.5]{circuit-switching.png}
+		
+		\begin{itemize*}
+			\item $T(m, l) = T_{overhead} + \underbrace{t_B \cdot m_c \cdot l}_{\text{path construction}} + t_B \cdot m$
+			\item $l$ is length of path
+			\item $m_c$ is control message size
+			\item $t_B$ is byte transfer time
+			\item If $m_c << m$, $T_{cs} = T_{overhead} + t_B \cdot m$
+		\end{itemize*}
+	
+	\item \textbf{Packet} (store \& forward routing): message partitioned into sequence of packets
+	
+		\vspace{0.2cm}
+		\includegraphics[scale=0.5]{packet-switching.png}
+		
+		\begin{itemize*}
+		\item with \textbf{Store and Forward}: entire packet (received and) stored by a switched before its forwarded to next switch
+		\item Connection between switches released as soon as packet stored at destination
+		\item \textbf{Advantages}: bandwidth utilization, reduce danger of deadlock
+		\item \textbf{Disadvantages}: Transmission time increases with number of switches. Memory demands on switches
+		\item $T(m, l) = T_{overhead} + l(t_h + t_B \cdot m)$
+		\item $t_h$ is time to store packet in buffer
+		\item Since $t_h$ is typically small, $T \approx T_{overhead} + l \cdot t_B \cdot m$
+		\item With \hl{deterministic routing}, transmission time is sum of time to transmit all packets
+		\item With \hl{adaptive routing}, transmission time can be overlapped
+		\end{itemize*}
+		
+		\vspace{0.2cm}
+		\includegraphics[scale=0.5]{packet-switching2.png}
+	
+	\item \textbf{Cut-through routing}: Pipeline each packet through different paths
+	
+	\includegraphics[scale=0.5]{cut-through-routing.png}
+	
+\end{itemize*}
+
+\end{spacing}
+
+\end{document}

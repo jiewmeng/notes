@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS2010 - Binary Search Trees (BST)}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{BST}
+
+\subsection{BST Property}
+
+\texttt{x.left.key $<$ x.key $\le$ x.right.key}
+
+Left sub-tree $<$ Parent 
+
+Right sub-tree $\le$ Parent
+
+\subsection{Searching}
+
+\begin{verbatim}
+search(node, value)
+    if (node == null) return null // not found
+    if (node == value) return start // found
+    if (node < value) return search(node.left) // search left sub tree
+    if (node >= value) return search(node.right) // search right sub tree 
+\end{verbatim}
+
+\subsection{Insertion}
+
+\begin{verbatim}
+insert(node, value) 
+    if (node == null) return new Vertex(value) // found empty spot to insert
+    if (value < node) // look in the left sub-tree to insert
+        node.left = insert(node.left, value) 
+        node.left.parent = node
+    else // look in right sub-tree to insert
+        node.right = insert(node.right, value)
+        node.right.parent = node
+    return node
+\end{verbatim}
+ 
+
+\subsection{findMin}
+
+\begin{verbatim}
+findMin(node)
+    if (node == null) return null // empty tree!!!
+    if (T.left == null) return node // nothing less that this node, its the minimum
+    else return findMin(node.left) // continue moving down left 
+\end{verbatim}
+
+\section{Transversal}
+
+\begin{tabular}{l l}
+\textbf{In-order (Sorted order)} &    \\
+\begin{minipage}{8cm}
+\begin{verbatim}
+inorder(node) 
+    if (node == null) return
+    inorder(node.left)
+    process(node)
+    inorder(node.right)
+\end{verbatim}
+\end{minipage}
+& 
+\hspace{0.4cm}
+\begin{minipage}{4cm}
+\includegraphics[scale=0.7]{inorder.png}
+\end{minipage} \\  
+\textbf{Pre-order} \\
+\begin{minipage}{8cm}
+\begin{verbatim}
+preorder(node) 
+    if (node == null) return
+    process(node)
+    inorder(node.left)
+    inorder(node.right)
+\end{verbatim}
+\end{minipage}
+& \hspace{0.4cm}
+\begin{minipage}{4cm}
+\includegraphics[scale=0.7]{preorder.png}
+\end{minipage} \\
+\textbf{Post-order} \\
+\begin{minipage}{8cm}
+\begin{verbatim}
+postorder(node) 
+    if (node == null) return
+    inorder(node.left)
+    inorder(node.right)
+    process(node)
+\end{verbatim}
+\end{minipage}
+& \hspace{0.4cm}
+\begin{minipage}{4cm}
+\includegraphics[scale=0.7]{postorder.png} 
+\end{minipage}
+\end{tabular}
+
+\section{Successor}
+
+Either the max of the right sub-tree. Go up until we make a right turn
+
+\begin{verbatim}
+successor(node) 
+    // if it has a right sub-tree, min of sub-tree is successor
+    if (node.right != null) return findMin(node.right) 
+    else 
+        parent = node.parent
+        curr = node
+        while (parent != null && curr == parent.right) 
+            curr = parent
+            parent = curr.parent
+        if (parent == null) return null // no right child nor parent (only node left)
+        else return parent 
+\end{verbatim}
+
+\begin{center}
+\includegraphics[scale=0.6]{sucessor.png}
+\end{center}
+
+\section{Delete ($O(h)$)}
+
+\begin{enumerate*}
+	\item find the node to delete
+	\item if the node is a \textbf{leaf} (no children), just remove it
+	\item if it has only a \textbf{1 child}, just bypass node to remove
+	\item if it has \textbf{2 children}, replace node with sucessor. Then remove node 
+\end{enumerate*}
+
+\end{spacing}
+
+\end{document}

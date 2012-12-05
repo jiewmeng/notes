@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{All Pairs Shortest Path}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Floyd Warshall's ($O(V^3)$)}
+
+\begin{verbatim}
+for (intermediate in V)
+    for (src in V)
+        for (dest in V)
+            dist[src][dest] = min(
+                dist[src][dest], 
+                dist[src][intermediate] + dist[intermediate][dest])
+\end{verbatim}
+
+\subsection{Print actual SP}
+
+Using predecessor matrix. Where \texttt{p[i][j]} is last vertex before \texttt{j}
+
+\begin{verbatim}
+if (dist[src][intermediate] + dist[intermediate][dest] < dist[src][dest])
+    dist[src][dest] = dist[src][intermediate] + dist[intermediate][dest]
+    p[src][dest] = intermediate
+\end{verbatim}
+
+\subsection{Transitive Closure Problem}
+
+Determine if vertex is connected to another. 
+
+\begin{verbatim}
+connected[i][j] = connected[i][j] | connected[i][k] & connected[k][j]
+\end{verbatim}
+
+\subsection{Minimax/Maximin}
+
+Minimax: finding minimum of maximum edge weight along all possible paths from one vertex to another. 
+
+\begin{verbatim}
+dist[i][j] = min(
+        dist[i][j],
+        max(dist[i][k], dist[k][j])
+    )
+\end{verbatim}
+
+\subsection{Detect Any/-ve Cycle}
+
+Set the diagonal to INF, after Floyd Warshall, recheck diagonal. If its -ve, it means theres a -ve cycle. If its not infinity, it means theres a cycle
+
+
+
+\end{spacing}
+
+\end{document}

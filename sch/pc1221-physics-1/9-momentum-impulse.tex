@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+\usepackage{pifont}
+
+\newcommand{\tick}{\ding{52}}
+\newcommand{\cross}{\ding{54}}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Momentum \& Collisions}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Momentum ($kg \cdot m/s$)}
+
+\begin{equation}
+	\boxed{p = mv}
+\end{equation}
+
+\begin{equation}
+	\boxed{\frac{d}{dt} p = m \cdot \frac{d}{dt} v = ma = \sum{F}}
+\end{equation}
+
+\section{Conservation of Momentum}
+
+$$\underbrace{p_{i1} + p_{i2}}_{\text{initial momentum}} = \underbrace{p_{f1} + p_{f2}}_{\text{final momentum}}$$
+
+\section{Impulse ($N \cdot s$)}
+
+Change in momentum
+
+\begin{equation}
+	\boxed{J = \sum F \Delta t}
+\end{equation}
+
+\begin{align}
+\sum F &= \frac{\Delta p}{\Delta t} \\
+\sum F \Delta t &= \Delta p \\
+J &= \Delta p
+\end{align}
+
+\begin{equation}
+	\boxed{\int_a^b \sum F {dt} = \int_a^b \frac{dp}{dt} {dt} = \int_a^b {dp} = \Delta p= J}
+\end{equation}
+
+\section{Collisions}
+
+\begin{tabular}{l | cc | l}
+	\textbf{Conserved?} & \textbf{KE} & \textbf{Momentum}& \textbf{Perfect} \\
+	\hline
+	\textbf{Inelastic} & \cross & \tick & Stick together \\
+	\textbf{Elastic} & \tick & \tick & Atomic level only \\
+\end{tabular}
+
+\subsection{(Perfectly) Inelastic}
+
+$$m_1 v_{1i} + m_2 v_{2i} = \underbrace{(m_1 + m_2)}_{\text{stick tgt}} v_f$$
+
+\subsection{Elastic}
+
+$$m_1 v_{1i} + m_2 v_{2i} = m_1 v_{1f} + m_2 v_{2f}$$
+
+$$\frac{1}{2} m_1 v_{1i}^2 + \frac{1}{2} m_2 v_{2i}^2 = \frac{1}{2} m_1 v_{1f}^2 + \frac{1}{2} m_2 v_{2f}^2$$
+
+
+\end{spacing}
+
+\end{document}

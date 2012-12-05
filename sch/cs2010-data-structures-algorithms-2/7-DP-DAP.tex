@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Dynamic Programming/Algorithms on DAG}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{SS(S|L)P on DAG ($O(V+E)$)}
+
+Single-source shortest/longest paths on DAG can be found in $O(V+E)$ using \hl{topological sort} $O(V+E)$ then r\hl{elax/stretch} $O(V+E)$ each outgoing edges of vertices in topological order. 
+
+Bottom-up DP. 
+
+Since vertices are processed in topological order, there is no way to go from $v_0$ to $v_1$, since there is \hl{no cycle}
+
+\subsection{Pseudocode}
+
+\begin{verbatim}
+dist = new int[V]
+dist.fill(-INF)
+dist[src] = 0
+G = toposort(G, src)
+foreach (v in V(G))
+    foreach (adjEdge of v)
+        if (dist[adjEdge.dest] < dist[node] + adjEdge.weight)
+            dist[adjEdge.dest] = dist[node] + adjEdge.weight
+    
+\end{verbatim}
+
+
+\section{Longest Increasing Subsequence}
+
+\subsection{Pseudocode}
+
+\begin{verbatim}
+lis(v): 
+    if (v == N-1) // last node
+        return 1
+    if (memo[v]) 
+        return memo[v]
+    int ans = 1 
+    for (int j = v+1; j < N; j++)
+        if (v.value < j.value) // implicit edge
+            ans = max(ans, lis(j+1))
+    memo[v] = ans
+    return ans
+\end{verbatim}
+
+\section{Counting Paths in DAG}
+
+\subsection{Pseudocode (Top Down, recursion with memo starting from dest)}
+
+\begin{verbatim}
+numPathsTopDown(v):
+    if (v == V-1) // last node (dest)
+        return 1
+    if (memo[v]) 
+        return memo[v]
+    int ans = 0
+    foreach (neighbour of v)
+        ans += numPaths(neighbour)
+    memo[v] = ans
+    return ans  
+\end{verbatim}
+
+\subsection{Pseudocode (Bottom Up, start from source)}
+
+\begin{verbatim}
+numPathsBottomUp(v):
+    ways = new int[V]
+    ways.fill(0)
+    ways[v] = 1
+    foreach (node in toposort(G, v)) // propagate info in topo-order, starting from v
+        foreach (neighbour of node)
+            ways[neighbour] += ways[node]
+\end{verbatim}
+
+\section{Travelling Salesman Problem}
+
+\begin{verbatim}
+// where visited is a bitmask keeping track of nodes visited before
+tsp(v, visited):
+    if (allVisited(visited))
+        return weight(v, 0) // all visited go back to source
+    if (memo[v][visited])
+        return memo[v][visited]
+        
+    memo[v][visited] = INF
+    foreach (neighbour of v) // v in V if a complete graph
+        if (visited[neighbour])
+            memo[v][visited] = min(memo[v][visited], 
+                weight(v, neighbour) + tsp(neighbour, visited+=neighbour))
+    return memo[v][visited]
+\end{verbatim}
+
+Space complexity: $O(N \times 2^N)$
+
+Time complexity: $O(N^2 \times 2^N)$
+
+\end{spacing}
+
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS3210 - 4 - Performance}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Response time}
+
+\begin{itemize*}
+	\item User CPU time: time for executing program
+	\item System CPU time: time for OS routines
+	\item Waiting time: IO waiting, time sharing
+\end{itemize*}
+
+\subsection{User CPU Time}
+
+$T_{U\_CPU} = n_{cycle}(A) \cdot t_{cycle}$
+
+\begin{itemize*}
+	\item $t_{cycle} = \textrm{clock cycle time} = 1/\textrm{clock rate}$
+\end{itemize*}
+
+$c_{cycle}(A) = \sum_{i=1}^{n} n_{i}(A) \cdot CPI_{i}$
+
+\begin{center}
+\boxed{
+	$$T_{U\_CPU} = n_{instr}(A) \cdot CPI(A) \cdot t_{cycle}$$
+}
+\end{center}
+
+\subsection{MIPS (Million Instructions Per Instruction}
+
+\begin{center}
+\boxed{
+	$$MIPS(A) = \frac{n_{instr}(A)}{T_{U\_CPU}(A) \cdot 10^6}$$
+}
+\end{center}
+
+\begin{center}
+\boxed{
+$$MIPS(A) = \frac{r_{cycle}}{CPI(A) \cdot 10^6}$$
+}
+\end{center}
+
+\subsection{MFLOPS}
+
+\begin{center}
+\boxed{
+$$MFLOPS(A) = \frac{n_{flt\_op}(A)}{T_{U\_CPU}(A) \cdot 10^6} \cdot \frac{1}{s}$$
+}
+\end{center}
+
+\section{Memory Access Time with Caches}
+
+$$T_{U\_CPU} = (n_{cycle}(A) + n_{mem\_cycle}(A)) \cdot t_{cycle}$$
+
+Considering 1 level cache miss
+
+$$_{mem\_cycle} = n_{read\_cycle}(A) + n_{write\_cycle}(A)$$
+
+$$n_{read\_cycle}(A) = n_{read}(A) \cdot r_{read\_miss}(A) \cdot n_{miss\_cycle}$$
+
+$n_{miss\_cycle}$: additional cycles required for loading new cache line
+
+\textbf{\hl{Combined}}
+
+$$T_{U\_CPU} = n_{instr}(A) \cdot ( CPI(A) + \underbrace{n_{rw} \cdot r_{miss} \cdot n_{miss\_cycles}}_{\text{additional cycles due to miss}} ) \cdot T_{cycle}$$
+
+\textbf{Multi level cache}
+
+$$t_{read\_access} = \underbrace{t_{read\_hit} + r_{read\_miss} \cdot t_{read\_miss}}_{\text{L1}}$$
+
+$$t_{read\_miss} = \underbrace{t_{read\_hit} + r_{read\_miss} \cdot t_{read\_miss}}_{\text{L2}}$$
+
+\textbf{Global read miss rate}
+
+$$r_{read\_miss\_L1} \cdot r_{read\_miss\_L2} ...$$
+
+\section{Parallel execution time}
+
+Parallel runtime, $T_p (n)$, where $n$ refers to problem size and $p$ means execution on $p$ processors. Refers to time between start and end of \textbf{all} $p$ processors. Consists of 
+
+\begin{itemize*}
+	\item Computation
+	\item Data exchange
+	\item Syncronization
+	\item Waiting time (unequal load, wait for shared resources)
+\end{itemize*}
+
+\subsection{Cost of parallel program}
+
+$$C_p (n) = p \cdot T_p (n)$$
+
+Cost optimal if executes same number of operations as fastest sequential program
+
+\subsection{\color{red} Speedup}
+
+Saving in execution time (benefit of parallelism)
+
+$$S_p(n) = \frac{T^*(n)}{T_p(n)}$$
+
+\begin{itemize*}
+	\item $T_p(n)$: parallel execution time
+	\item $T^*(n)$: best sequential execution time
+\end{itemize*}
+
+\subsection{Efficiency}
+
+Actual degree of speedup acheived compared to maximum
+
+$$E_p(n) = \frac{T^*(n)}{C_p(n)} = \frac{S_p(n)}{p} = \frac{T^*(n)}{p \cdot T_p(n)}$$
+
+Ideal speedup, $S_p(n) = p$ corresponds to $E_p(n) = 1$
+
+\section{Amdahl's Law (Fixed problem size)}
+
+Improvement in performance in parallel algorithm over sequential algorithm is limited by fraction which cannot be parallelized ($f$, sequential fraction)
+
+$$S_p(n) \le \frac{1}{f}$$
+
+If 10\% of program is sequential, max speedup is $1/0.1=10$
+
+\section{Gustafson's Law (Fixed execution time)}
+
+As problem size gets large and assuming parallel program is perfectly parallelizable without overheads
+
+$$\lim_{n \to \infty} S_p(n) = p$$
+
+\end{spacing}
+
+\end{document}

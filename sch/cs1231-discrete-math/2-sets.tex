@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS1231 - Sets}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Terminology}
+
+\begin{itemize*}
+	\item $\in$: Membership
+	\item $\subset$: Includes
+\end{itemize*}
+
+\section{Axiomatic Set Theory}
+
+\subsection{Empty Set ($\varnothing$ or ${}$)}
+
+Set with no elements
+
+$\underbrace{\exists X}_{\textrm{empty set}} \underbrace{(\forall Y (Y \notin X))}_{\textrm{no elements in set}}$
+
+\subsection{Empty set is a subset of all sets}
+
+$\underbrace{\forall X}_{\textrm{empty set}}  \underbrace{\forall Z}_{\textrm{any set}} ( \underbrace{\forall Y (Y \notin X)}_{\textrm{empty set}} \Rightarrow \underbrace{(X \subset Z)}_{\textrm{subset of any set}})$
+
+\subsection{Extensionality/Equality}
+
+Sets are equal iff the have the same elements
+
+$\forall X \forall Y (\underbrace{(\forall Z (Z \in X \Leftrightarrow Z \in Y))}_{\textrm{same elements}} \Leftrightarrow X = Y)$
+
+$\forall X \forall Y (\underbrace{(X \subset Y \wedge Y \subset X)}_{\textrm{subsets of each other}} \Leftrightarrow X = Y)$
+
+\subsection{Pairing}
+
+A set ($Z$) that contains sets $X$ \& $Y$ exists
+
+$\forall X \forall Y \exists Z \underbrace{\forall T ((T = X \vee T = Y)}_{\textrm{T is either in X or Y}} \Leftrightarrow T \in Z)$
+
+\subsection{Unordered Pair}
+
+Pair of 2 sets eg. $\{ X, Y \}$ is the set that contains $X$ \& $Y$
+
+\subsection{Singleton}
+
+Set $\{X, X\} = \{X\}$ is called a singleton
+
+\subsection{Unions}
+
+If $S$ is a set of sets, the $T$ (the union) exists which contains all elements in a set in S
+
+$\forall S \exists T 
+\underbrace{\forall Y ((Y \in T)}_{\textrm{all elems in union}} 
+\Leftrightarrow 
+\underbrace{\exists Z((Z \in S)}_{\textrm{one of the sets}} \wedge 
+\underbrace{(Y \in Z)}_{\textrm{y is in one of the sets}}))$
+
+\subsection{Power Set ($\mathcal{P}(S)$)}
+
+All possible subsets of set
+
+$\forall S \underbrace{\exists T}_{\text{a possible subset}} \underbrace{\forall X ((X \in T)}_{\text{all elem of possible subset}} 
+\underbrace{\Leftrightarrow (X \subset S)}_{\text{x an elem of the set}})$
+
+\underline{Examples}: 
+
+$\mathcal{P}(\{1,2\}) = \{ \varnothing, \{1\}, \{2\}, \{1,2\} \}$
+
+\subsection{Regularity/Axiom of Foundation}
+
+Every non empty set has an element disjoint from the set. Also see \href{http://math.stackexchange.com/questions/204865/axiom-of-regularity}{math.stackexchange question}
+
+$\forall X (X \neq \varnothing \Rightarrow (\exists Y (Y \in X \wedge \forall Z (Z \in X \Rightarrow Z \notin Y))))$
+
+\underline{Remember}: everything is a set so ...
+
+$0 = \varnothing$
+
+$1 = \{0\}$
+
+$2 = \{0, 1\}$
+
+$3 = \{0, 1, 2\}$
+
+$4 = \{0, 1, 2, 3\}$ ... 
+
+So 4 has 3 which is not in 2
+
+\subsubsection{No set is a member of itself}
+
+$\forall X (X \notin X)$
+
+\subsection{Infinity Set}
+
+$\exists X (\varnothing \in X \wedge (\forall Y (Y \in X \Rightarrow Y \cup {Y} \in X)))$
+
+\underline{Example}: $\{ \varnothing, \{\varnothing\}, \{\varnothing, \{\varnothing\}\}, ... \}$
+
+\subsection{Separation}
+
+Given a set ($X$), selecting elements that satisfy a property ($p$) produces a set ($Y$)
+
+$\forall X \exists Y \forall Z (Z \in Y \Leftrightarrow (Z \in X \wedge p(x)))$
+
+\section{Set Operations}
+
+\subsection{Intersection ($\bigcap S$)}
+
+Let $S$ be a set of sets. The intersection of sets in $S$ is the set $T$ that contains elements that belong to all the sets in $S$
+
+$\forall S \exists T \forall Y ((Y \in T) \Leftrightarrow \forall Z ((Z \in S) \Rightarrow (Y \in Z)))$
+
+\begin{itemize*}
+	\item $A \cap \varnothing = \varnothing$
+	\item $A \cap B = B \cap A$
+	\item $A \cap (B \cap C) = (A \cap B) \cap C$
+	\item $A \subset B \Leftrightarrow A \cap B = A$
+	\item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+	\item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+\end{itemize*}
+
+\subsection{Disjoint}
+
+2 sets are disjoint iff $S \cap T = \varnothing$
+
+\subsubsection{Mutally Disjoint}
+
+Let S be a set of sets. All sets $T \in S$ are disjoint if every 2 different sets are disjoint. "Theres no intersection between sets"
+
+$\forall X \in S \forall Y \in S (X \neq Y \Rightarrow X \cap Y = \varnothing)$
+
+\subsubsection{Partition}
+
+Let $S$ be a set, $V$ be a set of non-empty subsets in $S$. Then $V$ is a partition of $S$ iff
+
+\begin{itemize*}
+	\item Sets $V$ are mutually disjoint
+	\item Union of sets in V equals S
+\end{itemize*}
+
+\subsection{Difference}
+
+\subsubsection{Non Symmetric ($\backslash$)}
+
+$A \backslash B$
+
+"In A, not in B"
+
+\textbf{Complement}
+
+$\overline{T}^S$ is the complement of $T$ in $S$ ($S \backslash T$)
+
+$\forall X (X \in A \backslash B \Leftrightarrow (X \in A \wedge X \notin B))$
+
+\subsubsection{Symetric Difference ($-$)}
+
+"Elements that belong in one of the sets but not both"
+
+$\forall X (X \in (A - B) \Leftrightarrow (X \in A) \oplus X \in T)$
+
+\begin{itemize*}
+	\item $\oplus$: XOR
+\end{itemize*}
+
+
+\end{spacing}
+
+\end{document}

@@ -1,0 +1,341 @@
+\documentclass[12pt, twocolumn]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+\usepackage{pifont}
+\usepackage{tabularx}
+
+\newcommand{\tick}{\ding{52}}
+\newcommand{\cross}{\ding{54}}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Physics 1 Final Notes}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Kinematics}
+
+\begin{tabular}{p{4cm}|p{1.3cm}|p{2cm}}
+
+& \textbf{Avg.} & \textbf{Inst.} \\
+\hline
+\textbf{Displacement ($m$)} & $\Delta x$ & - \\
+
+\textbf{Velocity ($m/s$)} & $\dfrac{\Delta x}{\Delta t}$ & $\lim_{\Delta t \to 0} \dfrac{\Delta x}{\Delta t}$ \\[0.3cm]
+
+\textbf{Acceleration ($m/s^2$)} & $\dfrac{\Delta v}{\Delta t}$ & $\lim_{\Delta t \to 0} \dfrac{\Delta v}{\Delta t}$ \\[0.3cm]
+
+\end{tabular}
+
+$$v_f = v_i + at$$
+$$s_f = s_i + \frac{1}{2} (v_i + v_f) t$$
+$$s_f = s_i + v_i t + \frac{1}{2} at^2$$
+$$v^2 = v_i^2 + 2a(x_f - x_i)$$
+
+\section{2D Motion}
+
+$$h = \frac{v_i^2 \sin^2{\theta}}{2g}$$
+
+$$R = \frac{v_i^2 \sin{2\theta}}{g}$$
+
+\subsection{Uniform Circular Motion}
+
+When object moves along circular path with constant speed
+$$a_c = \frac{c^2}{r}$$
+
+\subsubsection{Period (time for 1 cycle)}
+
+$$T = \frac{d}{v} = \frac{2 \pi r}{v}$$
+
+\subsubsection{Tangental Acceleration}
+
+Causes change in velocity
+
+$$a_t = \frac{\Delta v}{\Delta t}$$
+$$a_r = a_c$$
+$$a_{tot} = \sqrt{a_r^2 + a_t^2}$$
+
+\section{Force}
+
+\subsection{Newton's 1st Law}
+
+When net force = 0, object at rest will stay at rest. Object in motion will continue moving at constant velocity
+
+\begin{itemize*}
+	\item Inertia: tendency of object to resist change to velocity
+	\item Mass ($kg$): Independent of surroundings 
+	\item Weight ($N$): Dependent on gravity. $W = mg$
+\end{itemize*}
+
+\subsection{Newton's 2nd Law}
+
+$$F = ma$$
+
+\subsection{Newton's 3rd Law: Equal \& opposite force exists}
+
+\begin{itemize*}
+	\item Forces occurs in pairs
+	\item |Action Force| = |Reaction/Normal Force|
+\end{itemize*}
+
+\subsection{Friction}
+
+\textbf{Static friction} keeps object from moving
+$$f_s \le \mu_s n$$
+
+\textbf{Kinetic friction} when object is moving
+$$f_k = \mu_k n$$
+
+\section{Circular Motion}
+
+$$F_{circ} = m \frac{v^2}{r}$$
+
+\subsection{Conical Pendulum}
+
+$$v = \sqrt{Lg \sin{\theta} \tan{\theta}}$$
+
+Where $L$ is length of string
+
+\subsection{Motion on Horizontal Cicle}
+
+$$T = m \frac{v^2}{r} \qquad \qquad 
+v = \sqrt{\frac{Tr}{m}}$$
+
+\subsection{Horizontal Curve}
+
+Static friction provides centripetal force
+
+$$\mu_s \underbrace{m g}_{\text{n}} = m \frac{v^2}{r} \qquad \Rightarrow \qquad 
+v = \sqrt{\mu_s gr}$$ 
+
+\subsection{Banked Curve}
+
+$$v = \sqrt{rg \tan{\theta}}$$
+
+\subsection{Vertical Circle}
+
+Note the direction of centripetal force
+
+$$F_y = m \frac{\pm v^2}{r} = n \pm mg$$
+
+\section{Energy ($\approx Work$)}
+
+\subsection{Work ($J = Nm$)}
+
+$$W = F \Delta x = \int F \; dx$$
+
+\subsection{Hooke's Law/Spring force}
+
+$$F_{spring} = -kx$$
+$$PE_{spring} = \frac{1}{2} kx^2$$
+
+\subsection{Kinetic energy}
+
+$$KE = \frac{1}{2} mv^2$$
+
+\subsection{Potential energy}
+
+$$GPE = mgh$$
+
+\subsection{Power ($W = J/s$)}
+
+$$P = \frac{W}{\Delta t} = Fv$$
+
+\subsection{Conservation of Mechanical Energy}
+
+$$E_{mech} = KE + GPE$$
+$$E_{initial} = E_{final}$$
+
+\subsubsection{Non-conservative forces}
+
+\begin{align*}
+\Delta E_{mech} &= \Delta KE + \Delta PE \\
+&= -f_k d \\
+&= - \mu_k n d
+\end{align*}
+
+\section{Momentum \& Impulse}
+
+\subsection{Momentum}
+
+$$p = mv$$
+$$F = \frac{d}{dx} \; p$$
+
+\subsubsection{Conservation of momentum}
+
+$$\underbrace{p_{1i} + p_{2i}}_{\text{initial momentum}} = \underbrace{p_{1i} + p_{2i}}_{\text{final momentum}}$$
+
+\subsection{Impulse}
+
+Change in momentum
+$$J = \Delta p$$
+
+\subsection{Collisions}
+
+\begin{tabular}{l | cc | l}
+	\textbf{Conserved?} & \textbf{KE} & \textbf{$p$}& \textbf{Perfect} \\
+	\hline
+	\textbf{Inelastic} & \cross & \tick & Stick together \\
+	\textbf{Elastic} & \tick & \tick & Atomic level only \\
+\end{tabular}
+
+\subsubsection{(Perfectly) Inelastic}
+
+Conservation of momentum
+$$m_1 v_{1i} + m_2 v_{2i} = \underbrace{(m_1 + m_2)}_{\text{stick tgt}} v_f$$
+
+\subsubsection{Elastic}
+
+Conservation of momentum
+$$m_1 v_{1i} + m_2 v_{2i} = m_1 v_{1f} + m_2 v_{2f}$$
+
+Conservation of KE
+$$\frac{1}{2} m_1 v_{1i}^2 + \frac{1}{2} m_2 v_{2i}^2 = \frac{1}{2} m_1 v_{1f}^2 + \frac{1}{2} m_2 v_{2f}^2$$
+
+\section{Rotational Kinematics}
+
+$$1 \; rad = \frac{360}{2 \pi}$$
+$$\theta \; [rad] = \frac{180}{\pi} \; \theta \; [degrees]$$
+
+\vspace{0.5cm}
+
+\begin{tabular}{p{3.5cm}  p{2cm}}
+
+\textbf{Arc Length ($s$)} & $r \theta$ \\[0.1cm]
+
+\textbf{Displacement} & $\Delta \theta$ \\[0.3cm]
+
+\textbf{Speed ($\overline{\omega}$)} & $\dfrac{\Delta \theta}{\Delta t}$ \\[0.5cm]
+
+\textbf{Acceleration ($\overline{\alpha}$)} & $\dfrac{\Delta \omega}{\Delta t}$ \\[0.3cm]
+
+\end{tabular}
+
+\vspace{0.5cm}
+
+Rotational kinematic equations are similar to (linear) kinematic equations. eg. 
+$$\omega_f = \omega_i + \alpha t \qquad \qquad 
+v_f = v_i + at$$
+
+\subsection{Linear kinematics to rotational}
+
+$$s = r \theta$$
+$$v = r \omega$$
+$$a = r \alpha$$
+$$a_c = r \omega^2$$
+
+\section{Thermodynamics}
+
+\subsection{Linear Expansion}
+
+$$\Delta L = \alpha L_i \Delta T$$
+
+\subsection{Area Expansion}
+
+$$\Delta A = 2\alpha A_i \Delta T$$
+
+\subsection{Volume Expansion}
+
+$$\Delta V = \beta V_i \Delta T$$
+
+For a solid, $\beta = 3\alpha$
+
+\subsection{Gas Formula}
+
+$$PV \; [J] = nRT$$
+
+\underline{$T$ is in $K$elvins}. $n$ is number of moles. $R$ is universal gas constant.
+
+\subsection{Specific Heat ($c$)}
+
+How \underline{insensitive} a substance is to \underline{addition of energy}
+
+$$c = \frac{Q}{m \; \Delta t} \qquad \qquad 
+Q = c \; m \; \Delta t$$
+
+$Q$ is energy (eg. gained/lost in heating/cooling)
+
+\begin{itemize*}
+	\item Higher specific heat $\rightarrow$ worse burn
+	\item Lower specific heat $\rightarrow$ faster to cool down
+\end{itemize*}
+
+\subsection{Phase change}
+
+Change in state. No change in temperature
+
+\subsection{Latent heat ($L$)}
+
+Energy needed to change state of substance
+
+$$L = \frac{Q}{m} \qquad \qquad Q = \pm \; m L$$
+
+\begin{itemize*}
+	\item Positive energy when energy is transfered \underline{into} system (eg. boiling)
+	\item Negative energy when energy is transfered \underline{out} of system (eg. freezing)
+\end{itemize*}
+
+\subsection{Work}
+
+$$W = \int_{V_i}^{V_f} \; P \; dV$$
+
+* Think area under PV diagram
+
+\begin{itemize*}
+	\item Positive work if volume increases (arrow leftwards on PV)
+	\item Negative work if volume decreases (arrow right on PV)
+\end{itemize*}
+
+\subsection{1st Law of Thermodynamics}
+
+$$\Delta E_{int} = Q + W$$
+
+\begin{itemize*}
+	\item $\Delta E_{int}$ : Change in internal temperature of system
+	\item $Q$ : Heat energy added into system
+	\item $W$ : Work done \underline{on} the system
+\end{itemize*}
+
+\subsubsection{Isolated System/Adiabatic Free Expansion}
+
+$$Q = W = 0 \qquad \Rightarrow \qquad \Delta E_{int} = 0$$
+
+Example: air filling vaccum
+
+\subsubsection{Cyclic Process}
+
+$$\Delta E_{int} = 0 \qquad \Rightarrow \qquad Q = -W$$
+
+\subsubsection{Adiabatic Process}
+
+No energy transfer with surroundings. By insulation or fast process
+$$Q = 0 \qquad \Rightarrow \qquad \Delta E_{int} = W$$
+
+\subsubsection{Isothermal Process}
+
+$$\Delta E_{int} = 0 \qquad \Rightarrow \qquad Q = -W$$
+
+\subsubsection{Isobaric Process}
+
+$$W = -P \; \Delta V$$
+
+\subsubsection{Isovolumetric Process}
+
+$$W = 0 \qquad \Rightarrow \qquad Q = \Delta E_{int}$$
+
+\end{spacing}
+
+\end{document}

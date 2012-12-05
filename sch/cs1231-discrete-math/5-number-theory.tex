@@ -1,0 +1,278 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Number Theory (\& Systems)}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Number Theory}
+
+\subsection{Natural Numbers ($\mathbb{N}$)}
+
+Smallest set such that 
+
+\begin{enumerate*}
+	\item $\exists 0 (0 \in \mathbb{N})$
+	\item There exists a successor function $s$ on $\mathbb{N}$. $s(n)$ (denoted $n'$) is the successor of $n$. (Successor is $n+1$)
+	\item $\forall n \in \mathbb{N} (n' \neq 0)$
+	\item $\forall n, m \in \mathbb{N} (n' = m' \Rightarrow n = m)$
+	\item $\forall K \subset \mathbb{N} \forall n \in \mathbb{N} ((0 \in K \wedge (n \in K \Rightarrow n' \in K)) \Rightarrow K = \mathbb{N})$
+\end{enumerate*}
+
+\subsubsection{Less than equals ($\le$)}
+
+$$
+\forall n, m \in \mathbb{N}_c
+(n \le m \Leftrightarrow n \subset m)
+$$
+
+\underline{\textbf{$(\mathbb{N}_c, \le)$ is a partial order}}
+
+\begin{enumerate*}
+	\item We prove $(\mathbb{N}_c, \le)$ is a pre-order
+		\begin{enumerate*}
+			\item $(\mathbb{N}_c, \le)$ is reflexive by reflecivity of $\subset$
+			\item $(\mathbb{N}_c, \le)$ is transitive by transitivity of $\subset$
+			\item Therefore a pre-order
+		\end{enumerate*}
+	\item $(\mathbb{N}_c, \le)$ is anti-symmetric by anti-symmetry of $\subset$
+	\item Therefore a partial order
+\end{enumerate*}
+
+\underline{\textbf{Ordering Lemma}}
+
+$$n \le m \vee m \le n$$
+
+\underline{\textbf{$(\mathbb{N}_c, \le)$ is a total order}}
+
+\begin{enumerate*}
+	\item We know $(\mathbb{N}_c, \le)$ is a partial order
+	\item We know any 2 distinct elements in $\mathbb{N}_c$ are comparable by ordering lemma
+	\item Therefore total order
+\end{enumerate*}
+
+\underline{\textbf{$(\mathbb{N}_c, \le)$ is a well ordered}}
+
+\begin{enumerate*}
+	\item Sketch: prove every subset of $\mathbb{N}_c$ has a smallest element
+\end{enumerate*}
+
+\subsubsection{Addition}
+
+\begin{itemize*}
+	\item $\forall n \in \mathbb{N} (n+0=n)$
+	\item $\forall n, m \in \mathbb{N} (n+m' = (n+m)')$
+\end{itemize*}
+
+\subsubsection{Multiplication}
+
+\begin{itemize*}
+	\item $\forall n \in \mathbb{N} (n \times 0 = 0)$
+	\item $\forall n, m \in \mathbb{N} (n \times m' = (n \times m) + n)$
+\end{itemize*}
+
+\subsection{Natural Numbers}
+
+Let $\approx$ be a relation on $\mathbb{N} \times \mathbb{N}$ such that
+
+$$\forall n_1, n_2, m_1, m_2 (<n_1, n_2> \approx <m_1, m_2> \Leftrightarrow n_2 + m_1 = m_2 + n_1)$$
+$$\mathbb{Z} = (\mathbb{N} \times \mathbb{N})/\approx$$
+
+$n$ if $<0, n>$. $-n$ if $<n, 0>$
+
+\subsubsection{Addition}
+
+$$<a_1, a_2> + <b_1, b_2> = < a_1 + b_1, a_2 + b_2 >$$
+
+\subsubsection{Subtraction}
+
+$$<a_1, a_2> - <b_1, b_2> = < a_1 + b_2, a_2 + b_1 >$$
+
+\subsubsection{Multiplication}
+
+$$<a_1, a_2> \times <b_1, b_2> = < (a_1 \times b_2) + (a_2 \times b_1), (a_1 \times b_1) + (a_2 \times b_2) >$$
+
+\subsection{Rational Numbers}
+
+$$\forall n_1, m_1 \in \mathbb{Z} \forall n_2, m_2 \in (\mathbb{Z} \textbackslash \{0\})$$
+$$(<n_1, n_2> \approx <m_1, m_2> \Leftrightarrow n_2 \times m_1 = m_2 \times n_1)$$
+$$\mathbb{Q} = (\mathbb{Z} \times (\mathbb{Z} \textbackslash {0})) / \approx$$
+
+\subsubsection{Multiplication}
+
+$$a \times b = < a_1 \times b_1, a_2 \times b_2 > = \frac{a_1\times b_1}{a_2 \times b_2}$$
+
+\subsubsection{Addition}
+
+$$a + b = < (a_1 \times b_2) + (b_1 \times b_2), a_2 \times b_2 >$$
+
+\subsubsection{Subtraction}
+
+$$a - b = < (a_1 \times b_2) - (b_2 \times a_2), a_2 \times b_2 >$$
+
+\section{Divisibility}
+
+$m$ divides $n$, denoted \boxed{\underbrace{m}_{\text{divisor}} \; | \; \; n}
+
+$\exists q \in \mathbb{N} (n = m \times q)$ 
+
+\subsection{Proposition 8.2.2}
+
+$$m \; | \; n \Rightarrow m \le n$$
+
+\subsection{Proposition 8.2.3 - Remainder less than divisor}
+
+$$n \in \mathbb{N} \; 
+m \in \mathbb{N}^+ \; 
+((n = q \times m + r) \wedge (r < m))$$
+
+\subsection{Division Algorithm (Proposition 8.2.4)}
+
+$$n \in \mathbb{N} \;
+m \in \mathbb{N}^+ \;
+\exists ! q, \; r \in \mathbb{N} \; 
+(n = q \times m + r \wedge r < m)$$
+
+\begin{itemize*}
+	\item $n$ : dividend
+	\item $m$ : divisor
+	\item $r$ : remainder OR modulo $m$ of $n$
+	\item $q$ : quotient 
+\end{itemize*}
+
+\section{Co-prime}
+
+$n$ and $m$ are \textbf{relatively prime/co-prime}, denoted \boxed{n \perp m} iff
+
+$$\forall c \in \mathbb{N}^+ \; 
+(
+((c | n) \wedge (c | m)) \Rightarrow c = 1
+)$$ 
+
+\section{Prime numbers}
+
+$$p > 1 \wedge (\forall n \in \mathbb{N}^+ \; (n \; | \; p \Rightarrow (n = p \vee n = 1)))$$
+
+\subsection{Composite (not prime)}
+
+$$\neg \text{prime}(n) \wedge n \neq 1$$
+
+\subsubsection{A composite number can be expressed as a multiple of 2 $\mathbb{N}^+$ (Proposition 8.2.9)}
+
+$$\exists n, m \in \mathbb{N}^+ \; ((1 < n < q) \wedge (1 < m < q) \wedge q = n \times m) $$
+
+\section{GCD (Proposition 8.2.10)}
+
+There exists a unique number $c \in \mathbb{N}^+$ such that
+
+$$
+\underbrace{(c \; | \; n) \wedge (c \; | \; m)}_{\textrm{common divisor}} \wedge 
+\underbrace{(\forall q \in \mathbb{N}^+ (((q | n) \wedge (q | m)) \Rightarrow q \le c))}_{\text{largest unique}}$$
+
+\subsection{GCD of co-prime numbers is 1 (Proposition 8.2.12)}
+
+$$n \perp m \Leftrightarrow gcd(n, m) = 1$$
+
+\subsection{Bezout Identity (Proposition 8.2.13)}
+
+$$n, m \in \mathbb{N}^+ \qquad \exists a, b \in \mathbb{Z} \; (n \times a + m \times b = gcd(m, n))$$
+
+\subsection{Euclid's Lemma (Prop. 8.2.15)}
+
+$$n,m,p \in \mathbb{N}^+ \qquad 
+(\text{prime}(p) \wedge (p \; | \; n \times m)) \Rightarrow (p | n \vee p | m)$$
+
+\section{Factorization}
+
+Factorization of $n$ is a collection of possible duplicate prime numbers, $p_i$, such that
+
+$$n = \Pi_{i \in I} p_i$$
+
+\section{Fundamental Theorem of Arithmetic}
+
+Every $\mathbb{N}^+$ has a unique factorization
+
+\subsection{Common divisor divides the GCD (Prop. 8.3.4)}
+$$\forall q \in \mathbb{N}^+ \; (((q | n) \wedge (q | m)) \Rightarrow q | gcd(m, n))$$
+
+\subsection{LCM}
+
+\subsubsection{(Prop. 8.3.5)}
+
+$$n, m \in \mathbb{N}^+ \qquad 
+(n | c) \wedge (m | c) \wedge
+(\forall q \in \mathbb{N}^+ \; (((n|q) \wedge (m|q)) \Rightarrow c \le q))$$
+
+
+\subsubsection{(Prop. 8.3.6)}
+
+$$(n | lcm(n, m)) \wedge (m | lcm(n, m)) \wedge 
+(\forall q \in \mathbb{N}^+ \; ((n|q) \wedge (m|q) \Rightarrow lcm(n, m) \le q))$$
+
+
+\subsubsection{LCD (Prop. 8.3.7)}
+
+$$\forall q \in \mathbb{N}^+ \; ((n|q) \wedge (m|q)) \Rightarrow lcd(n, m) | q$$
+
+\section{Modular Arithmetic}
+
+$n$ is congruent to (m modulo c), denoted $n \equiv m \;  (\text{mod } c)$ iff
+
+$$(m < n \wedge c | n-m) \vee (n < m \wedge c | m - n) \vee (n = m)$$
+
+\subsection{(Prop. 8.4.2)}
+
+$$n \equiv m \; (\text{mod } c) \Leftrightarrow (n \text{ mod } c = m \text{ mod } c)$$
+
+\subsection{Congruence relation}
+
+$$< n, m > \in \equiv_{\text{mod } c} \text{ iff } \; n \equiv_{\text{mod } c} m$$
+
+\subsection{(Prop. 8.4.5)}
+
+$$(n+m) \text{ mod } c = (n \text{ mod } c + m \text{ mod } c) \text{ mod } c$$
+
+\subsection{(Prop. 8.4.6)}
+
+$$(n \times m) \text{ mod } c = (n \text{ mod } c \times m \text{ mod } c) \text{ mod } c$$
+
+\subsection{(Prop. 8.4.7)}
+
+$$(n_1 \equiv m_1 (\text{mod } c) \wedge 
+n_2 \equiv m_2 (\text{mod } c)) \Rightarrow
+( n_1 + n_2 \equiv (m_1 + m_2) (\text{mod } c) )$$
+
+
+\subsection{(Prop. 8.4.8)}
+
+$$(n_1 \equiv m_1 (\text{mod } c) \wedge 
+n_2 \equiv m_2 (\text{mod } c)) \Rightarrow
+( n_1 \times n_2 \equiv (m_1 \times m_2) (\text{mod } c) )$$
+
+
+\subsection{Fermat's Little Theorem}
+
+$$\text{prime}(p) \Rightarrow a^p \equiv a (\text{mod } p)$$
+
+\subsubsection{(Prop 8.4.10)}
+
+$$(\text{prime}(p) \wedge a \perp p) \Rightarrow a^{p-1} \equiv 1 (\text{mod } p)$$
+
+\end{spacing}
+\end{document}

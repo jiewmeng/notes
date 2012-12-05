@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Minimum Spanning Tree (MST)}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{MST}
+
+\begin{itemize*}
+	\item Spanning Tree of G with min total weight
+\end{itemize*}
+ 
+\subsection{Prims ($O(E\log{V})$)}
+
+\subsubsection{Pseudocode}
+
+\begin{verbatim}
+visited = new bool[V]
+foreach (neighbour in neighbours(src))
+    PQ.enqueue(neighbour) // { weight, neighbourIndex }
+while (PQ.size() > 0)
+    v = PQ.dequeue() // dequeue from PQ (O(log(V))
+    if (!visited[v]) // process each edge once (O(E))
+        MST.add(v)
+        foreach (neighbour in neighbours(v))
+            PQ.enqueue(neighbour) // insert into PQ (O(log(V))
+\end{verbatim}
+
+\subsection{Kruskal's ($O(E\log{V})$)}
+
+\subsubsection{Pseudocode}
+
+\begin{verbatim}
+processed = new bool[E]
+foreach (edge in edgeList) // edge list sorted by edge weight (PQ)
+    if (!MST.contains(edge) && adding edge does not form cycle)
+        MST.add(edge)
+\end{verbatim}
+
+\end{spacing}
+
+\end{document}

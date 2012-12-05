@@ -1,0 +1,75 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Parallel Programming Models}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Information Exchange}
+
+\subsection{Shared address space}
+
+\begin{itemize*}
+	\item Processes/Threads
+	\item Syncronization ensure concurrent access to same variables are syncronized
+	\item \textbf{Race conditions}: multiple threads accessing/modifing same shared variable (use locks)
+	\item \textbf{Critical section}: a part where concurrent access to shared variables may occur (mutal exclusion - 1 thread at a time)
+\end{itemize*}
+
+\subsection{Distributed address space}
+
+\begin{itemize*}
+	\item Message passing: send/recv
+	\item Types: point to point, collective
+\end{itemize*}
+
+\subsubsection{Communication Types}
+
+\includegraphics[scale=0.7]{communication-types.png}
+
+\section{Abstractions of Control Flows}
+
+\begin{tabular}{l | p{6cm} p{6cm}}
+
+& \textbf{Process} & \textbf{Threads} \\
+\hline
+\textbf{Address space} & Own & Shared (with process) \\
+\textbf{Communication} & Explicit &  \\
+\textbf{Assigned to} & Cores & Cores \\
+\textbf{Others} & Need context switch (overhead) - round-robin, parallel execution. Fork: child gets copy of parents address space & User level threads are managed by thread library. OS cannot map user level threads of same process to different execution resources - no parallelism. OS cannot switch to another threads if 1 blocks. Advantage is switching is fast
+\end{tabular}
+
+\subsection{Mapping from User to Kernel Level Threads}
+
+\subsubsection{Many (threads) to One (process) Mapping}
+
+\includegraphics[scale=0.7]{user-kernel-threads-many2one.png}
+
+\subsubsection{One (thread) to One (thread) Mapping}
+
+\includegraphics[scale=0.7]{user-kernel-threads-one2one.png}
+
+\subsubsection{Many (thread) to Many (thread) Mapping}
+
+\includegraphics[scale=0.7]{user-kernel-threads-many2many.png}
+
+
+\end{spacing}
+
+\end{document}

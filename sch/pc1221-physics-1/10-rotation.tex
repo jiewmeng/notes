@@ -1,0 +1,139 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Rotation of Rigid Object about Fixed Axis}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Radians}
+
+$$1 \textrm{rad} = \frac{360}{2\pi}$$
+
+$$\theta \textrm{ [rad]} = \frac{\pi}{180} \theta \textrm{ [degrees]}$$
+
+\section{Arc Length}
+
+$$s = r \theta$$
+
+\section{Angular stuff ...}
+
+\subsection{Position}
+
+$\theta$ measured from the +ve $x$ axis, counter clock wise
+
+\subsection{Displacement (degrees)}
+
+$$\Delta \theta$$
+
+\subsection{Speed (rad/s)}
+
+$$\overline{\omega} = \frac{\Delta \theta}{\Delta t}$$
+
+$$\omega = \lim_{\Delta t \to 0} \frac{\Delta \theta}{\Delta t}$$
+
+\subsection{Acceleration (rad/$s^2$)}
+
+$$\overline{\alpha} = \frac{\Delta \omega}{\Delta t}$$
+
+$$\alpha = \lim_{\Delta t \to 0} \frac{\Delta \omega}{\Delta t}$$
+
+\subsection{Directions (which is $+$ve)}
+
+Using right hand rule
+
+
+\section{Angular \& Linear Quantities}
+
+\begin{tabular}{p{5cm} | l}
+	
+	$\omega_f = \omega_i + \alpha t$ &
+	$v_f = v_i + at$ \\
+	
+	$\theta_f = \theta_i + \omega_i t + \frac{1}{2} \alpha t^2$ & 
+	$x_f = x_i + v_i t + \frac{1}{2} at^2$ \\
+	
+	$\omega_f^2 = \omega_i^2 + 2\alpha(\theta_f - \theta_i)$ &
+	$v_f^2 = v_i^2 + \frac{1}{2} a (x_f - x_i)$ \\
+	
+	$\theta_f = \theta_i + \frac{1}{2} (\omega_i + \omega_f) t$ & 
+	$x_f = x_i + \frac{1}{2} (v_i + v_f) t$
+	
+\end{tabular}
+
+$$s = r \theta$$
+
+$$v = r \omega$$
+
+$$a = r \alpha$$
+
+$$a_c = r \omega^2$$
+
+\section{Moment of Inertia}
+
+$$I = mr^2$$
+
+Smaller $\rightarrow$ easier to rotate
+
+\section{Rotational Kinetic Energy ($J$)}
+
+$$K_R = \frac{1}{2} I \omega^2$$
+
+\section{Parallel Axis Theorm}
+
+If axis is not though center of mass, but some axis parallel to axis through center of mass
+
+$$I = I_{CM} + MD^2$$
+
+Where $I_{CM}$ is axis through center of mass. $D$ is distance from center of mass (rmb: $d = \sqrt{x^2 + y^2}$)
+
+\section{Torque (Rotational Force, $N \cdot m$ (not joules))}
+
+$$\tau = (F \sin{\theta}) \cdot d = I \alpha$$
+
+$d$ refers to moment arm. Counterclockwise positive
+
+\section{Power}
+
+$$P_R = \tau \omega$$
+
+\section{Work-KE Theorem in Rotational Motion}
+
+$$\sum W = \int_{w_i}^{w_f} I \omega \; d \omega = \frac{1}{2} I \omega_f^2 - \frac{1}{2} I \omega_i^2$$
+
+\section{Equations}
+
+\includegraphics[scale=0.7]{rotational-equ.png}
+
+\section{Pure Rolling}
+
+Velocity at center of mass, $v_{CM}$
+
+$$v_{CM} = R \omega$$
+
+Acceleration at center of mass, $a_{CM}$
+
+$$a_{CM} = R \alpha$$
+
+\includegraphics[scale=0.7]{pure-rotation-combi.png}
+
+\section{Total KE of rolling object}
+
+$$KE = \frac{1}{2} mv_{cm}^2 + \frac{1}{2} I_{CM} \omega^2$$
+
+\end{spacing}
+
+\end{document}

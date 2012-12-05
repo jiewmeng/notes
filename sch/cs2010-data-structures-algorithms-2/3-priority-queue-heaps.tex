@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{CS2010 - 3 - Min/Max Heaps, Priority Queue}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Complete Binary Tree in compact array}
+
+Start from 1 (skip 0)
+
+\begin{itemize*}
+	\item \texttt{indexOfParent(node) = floor(node/2)}
+	\item \texttt{indexOfLeft(node) = 2 * node} 
+	\item \texttt{indexOfRight(node) = 2 * node + 1}
+	\item No left child if \texttt{indexOfLeft > heapsize}
+	\item No right child if \texttt{indexOfRight > heapsize}
+\end{itemize*}
+
+\section{Heap Property}
+
+\begin{itemize*}
+	\item \textbf{Max Heap}: parent $\ge$ children
+	\item \textbf{Min Heap}: parent $\le$ children
+\end{itemize*}
+
+\section{Insert into Max Heap ($O(\log{n})$)}
+
+Insert at empty leaf then \texttt{shiftUp} to ensure heap property
+
+\begin{verbatim}
+insert(node) 
+    arr[] = v // insert at leaf
+    shiftUp(arr.length - 1) // shiftUp newly added node
+\end{verbatim}
+
+\section{Shift Up ($O(\log{n})$)}
+
+\begin{verbatim}
+shiftUp(node) 
+    while (node.index > 1 && node.parent < node)
+        swap(node, node.parent)
+        node = node.parent
+\end{verbatim}
+
+\section{Delete ($O(\log{n})$)}
+
+Replace node with last element, then call \texttt{shiftDown} on replaced node. 
+
+\section{Extract Max ($O(\log{n})$)}
+
+\begin{verbatim}
+extractMax() 
+    max = arr[1] // max is at index 1
+    arr[1] = arr[arr.length - 1] // replace max with last element
+    shiftDown(1)
+    return max
+\end{verbatim}
+
+\section{Shift Down ($O(\log{n})$)}
+
+\begin{verbatim}
+shiftDown(node) 
+    while (node != null)
+    	max = node
+    	if (node.left && max < node.left)
+    	    max = node.left
+    	if (node.right && max < node.right)
+    	    max = node.right
+    	
+    	if (max != node)
+    	    swap(node, max)
+    	else 
+    	    break 
+\end{verbatim}
+
+\section{Build Heap ($O(n)$)}
+
+Just insert all elements into array. Then shift down from root 
+
+\begin{verbatim}
+buildHeap(arr)
+    heap[0] = null // dummy entry
+    for (elem in arr) 
+        heap[] = elem // insert into heap arr
+    // no need to shift down for root
+    for (node = parent of last element; to root)
+        shiftDown(node)
+\end{verbatim}
+
+\end{spacing}
+
+\section{HeapSort ($O(n)$)}
+
+Build heap then keep extracting max
+
+\begin{verbatim}
+heapsort(arr)
+    buildHeap(arr)
+    for (i = 0 to arr.size()-1)
+    	sorted[] = ExtractMax()
+	return sorted
+\end{verbatim}
+
+\end{document}

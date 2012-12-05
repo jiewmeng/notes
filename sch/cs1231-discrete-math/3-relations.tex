@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Relations}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Basics}
+
+\subsection{Ordered Pair}
+
+$A \times B = {<a, b> | a \in A \wedge b \in B}$
+
+$< x, y >$
+
+\subsection{Cartesian Product ($A \times B$)}
+
+$\forall X \forall Y ( <X, Y> \in (A \times B) \Leftrightarrow (X \in A) \wedge (Y \in B) )$
+
+\subsubsection{Generalized}
+
+Let $V$ be set of sets, generalized cartesian product is:
+
+$\underset{S \in V}{\Pi} S = S_1 \times S_2 ... \times S_n = <s_1, s_2, ..., s_n>$
+
+\subsection{Tuples}
+
+$< X_1, X_2, ..., X_n >$
+
+
+\section{Relations}
+
+A binary relation from $A$ to $B$ noted $\mathcal{R}$ is a subset of $A \times B$
+
+\begin{itemize*}
+	\item $a \mathcal{R} b \quad \Rightarrow \quad <a, b> \in \mathcal{R}$ 
+	\item \textbf{Domain ("the $X$")}: $\mathcal{D}om(\mathcal{R}) = \{s \in S | \exists t \in T (s \mathcal{R} t)\}$
+	\item \textbf{Image ("the actual $Y$")}: $\mathcal{I}m(\mathcal{R}) = \{ t \in T | \exists s \in S (s \mathcal{R} t) \}$
+	\item \textbf{Co-domain/Range ("all possible $Y$")}: $co\mathcal{D}om(\mathcal{R}) = T$
+	
+		\begin{center}
+			\includegraphics[scale=0.7]{relations-domain-img.png}
+		\end{center}
+	
+	\item \textbf{Inverse/Converse}: $\forall s \in S \forall t \in T (s \mathcal{R}^{-1} t \Leftrightarrow t \mathcal{R} s)$
+	\item \hl{\textbf{Composition}}: $(g \circ f) = f(g(x))$
+		\begin{itemize*}
+			\item \textbf{Associative}: $h \circ (g \circ f) = (h \circ g) \circ f = h \circ g \circ f$
+			\item $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$
+		\end{itemize*}
+	
+		\begin{center}
+			\includegraphics[scale=0.7]{coposite-inv.png}
+		\end{center}
+\end{itemize*}
+
+\section{Properties}
+
+\subsection{Reflexive}
+
+All elements have a self loop. $\forall x \in A (x \hspace{1mm} \mathcal{R} \hspace{1mm} x)$
+
+\subsection{Symmetric}
+
+Every relation is bi-directional. $\forall x, y \in A (x \hspace{1mm} \mathcal{R} \hspace{1mm} y \Rightarrow y \hspace{1mm} \mathcal{R} \hspace{1mm} x)$
+
+\subsection{Transitive}
+
+If theres a relation from X to Y and Y to Z, then theres also a relation from X to Z (Triangle). $\forall x, y, z \in A((x \hspace{1mm} \mathcal{R} \hspace{1mm} y \wedge y \hspace{1mm} \mathcal{R} \hspace{1mm} z) \Rightarrow x \hspace{1mm} \mathcal{R} \hspace{1mm} z)$
+
+\section{Equivalence Relation}
+
+iff relation is \hl{reflexive, symetric, transitive}
+
+\subsection{Equivalance Class}
+
+Sets resulting from equivalence relation
+
+$E_x^{\mathcal{R}} = \{ y \in A | x \mathcal{R} y \}$
+
+\subsection{Set of Equivalance Classes}
+
+$A / \mathcal{R} = \{ s \in \mathcal{P}(A) | \exists x \in A (s = E_x^\mathcal{R}) \}$
+
+\underline{Example}:
+
+\includegraphics[scale=0.5]{equivalence-relation.png}
+
+\begin{align}
+A / \mathcal{R} &= \{ E_2^{\mathcal{R}}, E_3^{\mathcal{R}}, E_4^{\mathcal{R}} \} \\ 
+ &= \{ \{ 2 \}, \{ 3, 6, 9 \}, \{ 4, 7 \} \}
+\end{align}
+
+\section{Congruence modulo n}
+
+$\forall x, y \in \mathbb{Z} ( x \mathcal{R} y \Leftrightarrow n \textbackslash (x - y) )$
+
+Where $n \textbackslash m$ means $n$ divides $m$. Or $\exists k \in \mathbb{Z},  m = kn$
+
+\underline{Proof}
+
+\begin{enumerate*}
+	\item Reflexive: $\forall x \in \mathbb{Z}, n \textbackslash (x - x)$
+	\item Symmetric: $\forall x, y \in \mathbb{Z}$ if $n \textbackslash (x - y)$ then $n \textbackslash (y - x)$
+	\item Transitive: 
+		\begin{enumerate*}
+			\item Given any $x, y, z \in \mathbb{Z}$ if $n \textbackslash (x - y)$ and $n \textbackslash (y - z)$, then $\exists k_1, k_2 \in \mathbb{Z}$ such that $x - y = k_1 n$ and $y - z = k_2 n$
+			\item Thus $(x - y) + (y - z) = k_1 n + k_2 n$ which simplifies to $x - z = (k_1 + k_2) n$. This means $n \textbackslash (x - z)$
+		\end{enumerate*}
+	\item Hence, this is an equivalence relation
+\end{enumerate*}
+
+\subsection{Partition induced by equivalence relation}
+
+Let $\mathcal{R}$ be equivalence relation, then $A \textbackslash \mathcal{R}$ is a partition of $A$
+
+\underline{Proof}:
+
+\begin{enumerate*}
+	\item 2 related elements are in same equivalence class
+		\begin{enumerate*}
+			\item Assuming that $a \in E_b$ leads to $E_a \subset E_b$ and $E_b = E_a$, thus equals
+			\item Let $a, b \in A$, suppose $a \in E_b$
+			\item $b \mathcal{R} a$ by dfn equivalence class
+			\item Let $c$ be any element in $E_a$
+			\item $a \mathcal{R} c$
+			\item $b \mathcal{R} c$ by transitivity from (c). Thus $c \in E_b$. Then $E_a \subset E_b$
+			\item Let $d$ be any element in $E_b$
+			\item $b \mathcal{R} d$
+			\item $d \mathcal{R} b$ by symmetry
+			\item $d \mathcal{R} a$ by (c) and symmetry
+			\item $d \in E_a$. Thus $E_b \subset E_a$
+			\item $E_a \subset E_b \wedge E_b \subset E_a$ thus $E_a = E_b$
+		\end{enumerate*}
+	\item 2 equivalence class are disjoint, or are equal
+		\begin{enumerate*}
+			\item Since statement is in form $p \Rightarrow (q \vee r)$, we can proof $(p \wedge \neg q) \Rightarrow r$
+			\item $E_a \cap E_b \neq \varnothing$ (Premise)
+			\item $\exists x (x \in E_a \cap E_b)$
+			\item $\exists x (x \in E_a \wedge x \in E_b)$
+			\item $a \mathcal{R} x \wedge b \mathcal{R} x$
+			\item $x \mathcal{R} b$
+			\item $a \mathcal{R} b$
+			\item $E_a = E_b$
+		\end{enumerate*}
+	\item Union of all equivalence classes is A
+		\begin{enumerate*}
+			\item Proof $A = \bigcup_{S \in A \textbackslash \mathcal{R}} S$
+			\begin{enumerate*}
+				\item Suppose $x$ is any element of $A$
+				\item $x \mathcal{R} x$
+				\item $x \in E_x$
+				\item $E_x \in A \textbackslash \mathcal{R}$
+				\item $x \in \bigcup_{S \in A \textbackslash \mathcal{R}} S$
+				\item So $A \subset \bigcup_{S \in A \textbackslash \mathcal{R}} S$
+				\item Suppose $x$ is any element in $\bigcup_{S \in A \textbackslash \mathcal{R}} S$
+				\item $\exists S \in A \textbackslash \mathcal{R} (x \in S)$ ($x$ must belong in some $S$)
+				\item $\exists y \in A (S \in E_y)$ ($S$ is an equivalence class of some $y$
+				\item $E_y \subset A$
+				\item $x \in E_y \Rightarrow x \in A$
+				\item Thus $\bigcup_{S \in A \textbackslash \mathcal{R}} S \subset A$
+				\item Hence equals
+			\end{enumerate*}
+			
+			\item Proof distinct equiv. class mutually disjoint
+			\begin{enumerate*}
+				\item Suppose $E_u$ amd $E_v$ are 2 distinct equivalence class
+				\item $\exists u, v \in A (u \in E_u \wedge v \in E_v)$
+				\item Hence either $E_u \cap E_v = \varnothing$ or $E_u = E_v$
+				\item Since $E_v \neq E_u$, we conclude $E_u \cap E_v = \varnothing$ 
+			\end{enumerate*}
+		\end{enumerate*}
+\end{enumerate*}
+
+\subsection{(prop 5.4.2)}
+
+If $\mathcal{R}$ is an eqivalence relation on set $A$ and $a, b$ are 2 elements in $A$. If $a \; \mathcal{R} \; b$ then $E_a = E_b$
+
+\subsection{(prop 5.4.3)}
+
+If $\mathcal{R}$ is an equivalence relation on set $A$, and $a, b$ are elements in $A$, then either $E_a \cap E_b = \varnothing$ or $E_a = E_b$
+
+\subsection{(prop 5.4.4)}
+
+Given partition of a set, there exists an equivalence relation whose equivalence classes make up the partition. 
+
+\subsection{(dfn 5.5.1) Transitive closure}
+
+Transitive closure, denoted $\mathcal{R}^*$, is a relation that is: 
+
+\begin{itemize*}
+	\item Transitive
+	\item $\mathcal{R} \subset \mathcal{R}^*$
+	\item If $S$ is any other transitive relation such that $\mathcal{R} \subset S$, then $\mathcal{R}^* \subset S$
+\end{itemize*}
+
+\section{Partial \& Total Orders}
+
+\subsection{Anti-symmetric (dfn 5.6.1)}
+
+$$\forall x, y \in A \;
+(\underbrace{(x \mathcal{R} y \wedge y \mathcal{R} x)}_{\text{bi-directional arrow}} \Rightarrow \underbrace{x = y}_{\text{self-loop}})$$
+
+\subsection{Partial Order (dfn 5.6.2)}
+
+Partial order if its \underline{reflexive, anti-symmetric and transitive}
+
+\subsection{Hasse Diagram}
+
+\begin{enumerate*}
+	\item Draw directed graph with \underline{arrows pointing upwards}
+	\item Eliminate all self loops 
+	\item Eliminate all arrows implied by transitivity
+	\item Remove directions of arrows
+\end{enumerate*}
+
+\subsection{Comparable}
+
+Let $\preceq$ be a partial order. $a, b$ are comparable if either $a \preceq b$ or $b \preceq a$. 
+
+\subsection{Total Order} 
+
+If all elements are comparable
+
+$$\forall x, y \in A \; (x \preceq y \vee y \preceq x)$$
+
+\subsection{Maximal}
+
+No (comparable) larger element
+
+$$\forall y \in A \; (x \preceq y \Rightarrow x = y)$$
+
+\subsection{Maximum}
+
+Denoted $\top$. Only one
+
+$$\forall x \in A \; (x \preceq \top)$$
+
+\subsection{Minimal}
+
+$$\forall y \in A \; (y \le x \Rightarrow x = y)$$
+
+\subsection{Minimum}
+
+$$\forall x \in A \; (\perp \preceq x)$$
+
+\subsection{Well Ordered (dfn 5.6.9)}
+
+Well ordered if every non-empty subset contains a minimum element
+
+$$\forall S \in \mathcal{P}(A) \; (S \neq \varnothing \Rightarrow (\exists x \in S \; \forall y \in S \; (x \preceq y)))$$
+
+\end{spacing}
+
+\end{document}

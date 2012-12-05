@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Parallel Algorithm Design}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Overheads}
+
+\begin{itemize*}
+	\item Cost of starting thread/process
+	\item Communication
+	\item Syncronization
+\end{itemize*}
+
+In general, need for \hl{large granularity} (units of works) to run fast (\hl{less overheads}), but not so much there is too little parallel work
+
+\subsection{Communication}
+
+Tasks interact by sending messages through channels. 
+
+Channels are message queues connecting a task's output to another task's input
+
+\section{Foster's Design Methodology}
+
+\begin{itemize*}
+	\item \textbf{Partitioning}: tasks
+	\item \textbf{Communication}: provide data to tasks
+	\item \textbf{Agglomeration}: Reduce communications
+	\item \textbf{Mapping}: Map tasks to processors. Goal: minimize total time
+\end{itemize*}
+
+\subsection{Partitioning}
+
+\begin{itemize*}
+	\item \textbf{Data}: divide data into pieces of approx. same size. Then determine how to associate tasks to data
+	\item \textbf{Functional}: Divide computation into pieces. Determine how to associate data with these computations. 
+\end{itemize*}
+
+\subsubsection{Goals}
+
+\begin{tabular}{p{6cm} | p{6cm}}
+
+At least 10x primitive tasks & Ensure sufficient parallelism later \\ 
+\hline
+
+Minimize redundent computations and data & Complicates things as problem size increases \\ 
+\hline
+
+Primitive tasks roughly same size & Load balancing \\ 
+\hline
+
+Tasks should increase as problem size increases & ensure scalability
+\end{tabular}
+
+\section{Communication}
+
+In general, communication required to pass data between tasks
+
+\begin{itemize*}
+	\item \textbf{Local}: Small amounts of data from neighbours 
+	\item \textbf{Global}: Significant number of tasks contribute data to perform computation
+\end{itemize*}
+
+\includegraphics[scale=0.7]{local-global-communication.png}
+
+\subsection{Goals}
+
+\begin{itemize*}
+	\item Communication balanced between tasks (tree-like ($O(\log{n})$))
+	\item Task communicate with small number of neighbours
+	\item Overlap communication
+	\item Overlap computation
+\end{itemize*}
+
+\section{Agglomeration}
+
+\begin{itemize*}
+	\item Combine tasks into larger tasks (reduce communication)
+	\item Improve performance
+	\item Maintain scalability
+	\item Simplify programming
+	\item 1 agglomerated task per processor
+\end{itemize*}
+
+\subsection{Goals}
+
+\begin{itemize*}
+	\item Locality increased
+	\item Number of tasks increase with task size
+\end{itemize*}
+
+
+\section{Mapping}
+
+\begin{itemize*}
+	\item Assign task to processor
+	\item Maximize pricessor utilization (tasks on different prorcessors)
+	\item Minimize inter processor communication (assign tasks that communicate frequently to same processor)
+\end{itemize*}
+
+
+\end{spacing}
+
+\end{document}

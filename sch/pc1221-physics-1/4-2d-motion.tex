@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{PC1221 - 4 - 2D Motion}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{Displacements}
+
+\begin{center}
+\boxed{From:
+$$s_f = s_i + v_i t + \frac{1}{2} at^2$$}
+\end{center}
+
+$$x_f = v_{xi} t = (v_i \cos{\theta})t$$
+
+$$y_f = v_{yi} t + \frac{1}{2} a_y t^2 = (v_i \sin{\theta}) t - \frac{1}{2} gt^2$$
+
+$$y = (\tan{\theta})x - (\frac{g}{2v_i^2 \cos^2{\theta}})x^2$$
+
+\section{Max Height \& Range}
+
+Only for symetric motion
+
+$$h = \frac{v_i^2 \sin^2{\theta}}{2g}$$
+
+$$R = \frac{v_i^2 \sin{2\theta}}{g}$$
+
+\textbf{Proof (h)}
+
+$$\begin{aligned}
+x &= (v_i \cos{\theta})t \\
+t &= \frac{x}{v_i \cos{\theta}}
+\end{aligned}$$
+
+$$y = (v_i \sin{\theta})t - \frac{1}{2} gt^2$$
+
+$$y = (v_i \sin{\theta}) \times \frac{x}{v_i \cos{\theta}} - \frac{1}{2} g (\frac{x}{v_i \cos{\theta}})^2 $$
+
+Max when $v = 0$, just before coming down
+
+$$v_f = v_i \sin{\theta} - gt = 0$$
+
+$$v_i \sin{\theta} - gt = 0$$
+
+$$t = \frac{v_i \sin{\theta}}{g}$$
+
+Sub into $y$
+
+$$y = h = v_i \sin{\theta} (\frac{v_i\sin{\theta}}{g}) - \frac{1}{2} g (\frac{v_i \sin{\theta}}{g})^2$$
+
+$$h = \frac{v_i^2 \sin^2{\theta}}{g} - \frac{v_i^2 \sin^2{\theta}}{2g} = \frac{v_i^2 \sin^2{\theta}}{2g}$$
+
+\textbf{Max Range}
+
+Let $y = 0$ (on ground)
+
+$$v_i (\sin{\theta} )t - \frac{1}{2} gt^2 = 0$$
+
+$$t = \frac{2 v_i \sin{\theta}}{g}$$
+
+$$R = (v_i \cos{\theta}) \times \frac{2 v_i \sin{\theta}}{g} = \frac{v_i^2 \sin{(2\theta)}}{g}$$
+
+\section{Uniform Circular Motion}
+
+\begin{itemize*}
+	\item When object move along circular path with constant speed
+	\item Change in velocity related to acceleration
+	\item velocity vector tangent to path of object
+\end{itemize*}
+
+$$v_f = v_i + \Delta v$$
+
+\subsection{Centripetal Acceleration}
+
+\begin{itemize*}
+	\item Acceleration perpendicular to path of motion
+	\item Points to center of circle
+\end{itemize*}
+
+$$a_c = \frac{c^2}{r}$$
+
+\subsection{Period}
+
+\begin{itemize*}
+	\item Time require for 1 cycle
+	\item Distance = Circumference
+\end{itemize*}
+
+$$T = \frac{2 \pi r}{v}$$
+
+\subsection{Tangential Acceleration}
+
+\includegraphics[scale=0.6]{tangential-acceleration.png}
+
+Causes change in velocity (magnitude). 
+
+Tangential Acceleration: $a_t = \frac{\Delta v}{\Delta t}$
+
+Radial Acceleration: $a_r = a_c = \frac{v^2}{r}$
+
+$a_{total} = \sqrt{a_r^2 + a_t^2}$
+
+\section{Relative Velocity}
+
+\begin{itemize*}
+	\item $r$ is position seen from stationary frame
+	\item $r'$ is position from moving frame 
+\end{itemize*}
+
+$$r' = r - v_0 t$$
+
+\subsection{Acceleration from different frame of reference}
+
+Acceleration of particle measure from different frames of reference (moving at constant velocity) will be the same as: $v_0$ is a constant, thus having no effect on change of velocity
+
+$v' = v - v_0$
+
+\end{spacing}
+
+\end{document}

@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Graph Theory}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+Complete Graph - $|E(G)| = C(n, 2)$
+
+\textbf{Handshake Theorem} - Sum of degree of all vertices is even $\sum d(G) = 2|E(G)|$
+
+In an \textbf{undirected graph}, number of vertices with odd degree is even
+
+\textbf{Trail} is \textbf{walk} with \textbf{distinct edges}
+
+\textbf{Path} is \textbf{trail} with \textbf{distinct vertices}
+
+Connected if theres a walk between every pair of distinct vertices
+
+Theres a path between every pair of distinct vertices of a connected undirected graph
+
+\textbf{Euler trail} is a trail (every edge exactly once) transversing \textbf{every edge of G}
+
+Closed walk starts and ends at same vertex
+
+\textbf{Tour} is a \textbf{closed walk} that transverse every edge of G at least once
+
+\textbf{Euler tour} is a \textbf{tour} transversing \textbf{every edge exactly once}
+
+Euler tour if \textbf{no vertices of odd degree}
+
+\textbf{Euler trail but not Euler tour} if it has \textbf{exactly 2 vertices of odd degree}
+
+Euler $\rightarrow$ Edges, Hamilton $\rightarrow$ Vertices
+
+\textbf{Hamilton path} is a path containing \textbf{every vertex of G}
+
+\textbf{Cycle} is a closed trail whose \textbf{origin/internal vertex are distinct}. (no duplicated internal vertex)
+
+\textbf{Hamilton cycle} is a \textbf{cycle containing every vertex of G}
+
+
+\end{spacing}
+
+\end{document}

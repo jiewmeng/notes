@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage[a4paper, margin=1.2cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{color, soul}
+
+\graphicspath{{./_img/}}
+\setlength{\parindent}{0cm}
+
+\title{\textbf{Combinatorics}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{spacing}{1.5}
+
+\section{An Overview}
+
+\begin{itemize*}
+	\item Sum/Product rule
+	\item Permutations \& Combinations
+	\item Pigeonhole principle
+	\item Inclusion/exclusion principle
+	\item Recurrence relations
+	\item Generating functions (power series)
+\end{itemize*}
+
+\section{Product rule (dependence on other tasks)}
+
+When operation \hl{can} be broken down into 2 or more tasks. Number of ways to perform a task depend on how previous tasks are performed. Number of was to perform each task constant regardless of actions taken in prior tasks
+
+\underline{Example}
+
+How to label seats with a letter and a positive integer not exceeding 100. 
+
+$\text{ways} = 26 \times 100 = 2600$
+
+\section{Sum rule (independent of other tasks)}
+
+When operation \hl{cannot} be broken down into 2 or more tasks that cannot be down at the same time
+
+\underline{Example}
+
+How to choose 1 orange and 1 apple from a basket of 10 oranges and 20 apples. 
+
+$\text{ways} = 10 + 20$
+
+\section{Difference rule}
+
+$$(\text{finiteSet}(A) \wedge (B \subset A)) \Rightarrow (|A-B| = |A|-|B|)$$
+
+\underline{Example}
+
+How many passwords are there if: passwords are 6 to 8 alpha-numeric characters. Where passwords must contain $\ge 1$ digit
+
+Let $P$ be total number of passwords. $P_6, P_7, P_8$ be passwords with 6, 7 or 8 alphanumeric characters long. 
+
+$P_i = \text{alphanumeric} - \text{all letters}$
+
+$P_6 = 36^6 - 26^6$
+
+$P_7 = 36^7 - 26^7$
+
+$P_8 = 36^8 - 26^8$
+
+$P = P_6 + P_7 + P_8$
+
+\section{Inclusion-Exclusion principle}
+
+$$|A \cup B| = |A| + |B| - |A \cap B|$$
+
+$$|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |B \cap C| - |A \cap C| + |A \cap B \cap C|$$
+
+\section{Permutations}
+
+Ordered arrangement of objects. 
+
+\underline{Example}
+
+Permutations of "abc" $ = 3 \times 2 \times 1 = 3!$
+
+\subsection{r-Permutations}
+
+$$P(n, r) = \frac{n!}{(n-r)!}$$
+
+\underline{Example}
+
+How many permutations of "abcde" to create a string of length 3 $ = 5! / 2!$
+
+\subsection{r-Permutation with repetetion}
+
+$$n^r$$
+
+How many possible stings of length 3 can I build with "abced" $ = 5^3$
+
+\section{Combinations}
+
+Unordered selection of elements
+
+\subsection{r-Combinations}
+
+$$C(n, r) = \left( \begin{array}{c} a \\ b \end{array} \right) = \frac{n!}{r!(n-r)!}$$
+
+$$C(n,r) = C(n, n-r)$$
+
+\subsection{r-Combination with repetition}
+
+$$C(n+r-1, r) = C(n+r-1, n-1)$$
+
+\section{Pigeonhole Principle}
+
+If $k + 1$ or more objects are placed into $k$ boxes, at least 1 box contains 2 or more objects 
+
+\section{Inclusion-Exclusion Principle}
+
+$$|A_1 \cup A_2 \cup ... \cup A_n|  = \sum_{1 \le i \le n} |A_i| - \sum_{1 \le i < j \le n} |A_i \cap A_j| + ... + (-1)^{n+1} |A_1 \cap A_2 \cap ... \cap A_n|$$
+
+OR
+
+$$N(P_1' P_2' ...) = N - \sum_{i = 1}^n N(P_i)$$
+
+
+\end{spacing}
+
+\end{document}
