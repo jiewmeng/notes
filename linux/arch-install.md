@@ -105,6 +105,13 @@ Next `passwd [username]` to change the password
 
 	gedit chromium firefox p7zip file-roller eog git vlc evince gparted ntfs-3g samba gvfs gvfs-smb wget openssh libreoffice flashplugin blender meld xournal nodejs mongodb transmission-gtk gummi  youtube-dl gimp blender gnome-screenshot virtualbox virtualbox-guest-iso nautilus-open-terminal gnome-tweak-tool zeitgeist
 
+### GitHub
+
+Setup SSH Key `ssh-keygen -t rsa`
+
+	git config --global user.email "{name@email.com}"
+	git config --global user.name "{your name}"
+
 ### Virtual Box
 
 Create a file (`/etc.modules-load.d/vbox.conf`) with contents 
