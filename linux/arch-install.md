@@ -86,6 +86,7 @@ Setup SSH Key `ssh-keygen -t rsa`
 
 	git config --global user.email "{name@email.com}"
 	git config --global user.name "{your name}"
+	git config --global push.default simple
 
 ### Virtual Box
 
