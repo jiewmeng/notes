@@ -130,28 +130,28 @@ Install package control
 
 	import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
 
-### SSD Optimizations
+## 5. SSD Optimizations
 
-#### TRIM/Discard
+### TRIM/Discard
 
 	/dev/sda1  /       ext4   defaults,noatime,discard   0  1
 
 `discard` option in `fstab`. Note use of  `noatime` too
 
-#### IO Scheduler
+### IO Scheduler
 
 	echo noop > /sys/block/sdX/queue/scheduler
 
 Or just edit file. Selected option is denoted by square brackets
 
-#### Swappiness
+### Swappiness
 
 Edit `/etc/sysctl.conf`
 
 	vm.swappiness=1
 	vm.vfs_cache_pressure=50
 
-#### Browser Profiles
+### Browser Profiles
 
 Install `profile-sync-daemon` from AUR. 
 
@@ -163,6 +163,12 @@ Make windows use UTC time
 
 	[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
 	     "RealTimeIsUniversal"=dword:00000001
+
+## 6. Locale stuff
+
+Edit `/etc/locale.conf`
+
+	LANG="en_US.UTF-8"
 
 # Windows Stuff (Optimization)
 
