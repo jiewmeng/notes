@@ -55,7 +55,7 @@ Next `passwd [username]` to change the password
 
 ## 4. Packages
 
-	mesa xorg-server xorg-server-utils alsa-utils xf86-video-ati sudo xfce4
+	mesa xorg-server xorg-server-utils alsa-utils xf86-video-ati sudo xfce4 slim
 
 - `xf86-video-nouveau` for NVIDIA. 
 - `virtualbox-guest-utils` for Virtual Box guest
@@ -63,6 +63,13 @@ Next `passwd [username]` to change the password
 	chromium firefox p7zip git vlc gparted ntfs-3g samba gvfs gvfs-smb wget openssh libreoffice flashplugin meld xournal nodejs mongodb transmission-gtk gummi texlive-most youtube-dl gimp blender virtualbox virtualbox-guest-iso pidgin skype gksu opendesktop-fonts file-roller ristretto xfce4-screenshooter evince
 
     	xfce-theme-greybird faenza-xfce-addon faience-icon-theme  faience-themes
+
+### SLIM
+
+Inside `~/.xinitrc`
+
+	#!/bin/sh
+	exec startxfce4
 
 ### AUR with `yaourt`
 
@@ -169,6 +176,13 @@ Make windows use UTC time
 Edit `/etc/locale.conf`
 
 	LANG="en_US.UTF-8"
+
+## 7. Keyboard Shortcuts
+
+	/usr/bin/amixer set Master toggle
+	/usr/bin/amixer set Master playback 5%+
+	/usr/bin/amixer set Master playback 5%-
+	/usr/bin/terminal
 
 # Windows Stuff (Optimization)
 
